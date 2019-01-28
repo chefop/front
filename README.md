@@ -1,2 +1,2 @@
-# api
-Api for web app. 📟
+# front
+App for customer 🖥
