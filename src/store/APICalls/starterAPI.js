@@ -8,3 +8,7 @@ export const createStarter = (starter) => {
 export const fetchStarters = () => {
   return axios.get(`${API_URL}/starters`);
 };
+
+export const updateStarter = (starter) => {
+  return axios.patch(`${API_URL}/starters/${starter._id}`, starter);
+};
