@@ -1,7 +1,5 @@
 {
-  "plugins": ["prettier", 
-    "redux-saga",
-    "security"],
+  "plugins": ["prettier", "redux-saga", "security"],
   "extends": [
     "react-app",
     "plugin:prettier/recommended",
@@ -9,10 +7,13 @@
     "plugin:security/recommended"
   ],
   "rules": {
-    "prettier/prettier": ["error", {
-      "singleQuote": true,
-      "trailingComma": "all",
-      "arrowParens": "always"
-    }]
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "arrowParens": "always"
+      }
+    ]
   }
- }
+}
