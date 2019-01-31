@@ -1,13 +1,13 @@
+import {
+  phasedActionTypes,
+  phasedActionCreators,
+} from '../../../utils/actionsHelper';
+
 // Action types
-export const ADD_STARTER = 'ADD_STARTER';
+export const ADD_STARTER = phasedActionTypes('starter/ADD_STARTER');
 
 // Action creators
-export const addStarter = (starter) => {
-  return {
-    type: ADD_STARTER,
-    payload: starter,
-  };
-};
+export const addStarter = phasedActionCreators(ADD_STARTER);
 
 // Initial State
 const initialState = {
