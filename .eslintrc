@@ -1,19 +1,18 @@
 {
-    "plugins": ["prettier", 
-      "redux-saga",
-      "security"],
-    "extends": [
-      "react-app",
-      "prettier/react",
-      "plugin:prettier/recommended",
-      "plugin:security/recommended"
-    ],
-    "rules": {
-      "prettier/prettier": ["error", {
-        "singleQuote": true,
-        "trailingComma": "all",
-        "arrowParens": "always"
-      }]
-    }
+  "plugins": ["prettier", 
+    "redux-saga",
+    "security"],
+  "extends": [
+    "react-app",
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "plugin:security/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": ["error", {
+      "singleQuote": true,
+      "trailingComma": "all",
+      "arrowParens": "always"
+    }]
   }
-  
+ }

@@ -29,8 +29,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "eslint": "^5.12.1",
     "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-redux-saga": "^1.0.0",
     "eslint-plugin-security": "^1.4.0",
