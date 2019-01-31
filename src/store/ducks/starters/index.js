@@ -5,9 +5,11 @@ import {
 
 // Action types
 export const ADD_STARTER = phasedActionTypes('starter/ADD_STARTER');
+export const FETCH_STARTERS = phasedActionTypes('starter/FETCH_STARTER');
 
 // Action creators
 export const addStarter = phasedActionCreators(ADD_STARTER);
+export const fetchStarters = phasedActionCreators(FETCH_STARTERS);
 
 // Initial State
 const initialState = {
@@ -52,10 +54,21 @@ const initialState = {
 // Reducer
 const starterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_STARTER:
+    case ADD_STARTER.success:
       return {
         ...state,
-        userInstances: [...state.starters, action.payload],
+        starters: [...state.starters, action.payload],
+      };
+    case FETCH_STARTERS.success:
+      return {
+        ...state,
+        starters: action.payload,
+      };
+    case ADD_STARTER.failure:
+    case FETCH_STARTERS.failure:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;
