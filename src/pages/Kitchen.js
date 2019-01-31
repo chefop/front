@@ -40,7 +40,7 @@ const styles = (theme) => ({
   toolbar: theme.mixins.toolbar,
 });
 
-function Owner(props) {
+function Kitchen(props) {
   const { classes } = props;
 
   return (
@@ -49,7 +49,7 @@ function Owner(props) {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Gérant
+            Cuisine
           </Typography>
         </Toolbar>
       </AppBar>
@@ -63,18 +63,10 @@ function Owner(props) {
       >
         <div className={classes.toolbar} />
         <List>
-          {['Commandes', 'Tables', 'Menus', 'Carte'].map((text, index) => (
+          {['Commandes'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
-                {index === 0 ? (
-                  <TrendingUp />
-                ) : index === 1 ? (
-                  <AirlineSeatReclineNormal />
-                ) : index === 2 ? (
-                  <DeveloperBoard />
-                ) : (
-                  <Fastfood />
-                )}
+                <TrendingUp />
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -117,8 +109,8 @@ function Owner(props) {
   );
 }
 
-Owner.propTypes = {
+Kitchen.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Owner);
+export default withStyles(styles)(Kitchen);
