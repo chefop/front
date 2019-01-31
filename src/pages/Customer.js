@@ -10,12 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import {
-  DeveloperBoard,
-  Fastfood,
-  AirlineSeatReclineNormal,
-  Assignment,
-} from '@material-ui/icons';
+import { DeveloperBoard, Fastfood, Assignment } from '@material-ui/icons';
 
 const drawerWidth = 240;
 

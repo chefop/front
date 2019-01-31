@@ -8,6 +8,9 @@ class App extends Component {
   render() {
     return (
       <>
+        <Owner />
+        <Room />
+        <Kitchen />
         <Customer />
       </>
     );
