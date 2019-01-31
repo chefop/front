@@ -7,17 +7,18 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import reducer from './store/ducks'
-
-const store = createStore(reducer);
+import reducer from './store/ducks';
 
 // Components
 import App from './pages';
 
+const store = createStore(reducer);
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
-  </Provider>
-, document.getElementById('root'));
+  </Provider>,
+  document.getElementById('root'),
+);
 
 serviceWorker.unregister();
