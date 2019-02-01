@@ -22,7 +22,7 @@ function* addStarterWorker(action) {
   }
 }
 
-function* fetchStarterWorker() {
+function* fetchStartersWorker() {
   try {
     const res = yield call(starterAPI.fetchStarters);
     if (res.status === 200) {
@@ -66,7 +66,7 @@ function* addStarterSaga() {
 }
 
 function* fetchStartersSaga() {
-  yield takeLatest(FETCH_STARTERS.request, fetchStarterWorker);
+  yield takeLatest(FETCH_STARTERS.request, fetchStartersWorker);
 }
 
 function* updateStarterSaga() {

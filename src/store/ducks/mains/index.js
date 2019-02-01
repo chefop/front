@@ -5,13 +5,15 @@ import {
 
 // Action types
 export const ADD_MAIN = phasedActionTypes('main/ADD_MAIN');
-export const FETCH_MAINS = phasedActionTypes('main/FETCH_MAIN');
+export const FETCH_MAIN = phasedActionTypes('main/FETCH_MAIN');
+export const FETCH_MAINS = phasedActionTypes('main/FETCH_MAINS');
 export const UPDATE_MAIN = phasedActionTypes('main/UPDATE_MAIN');
 export const DELETE_MAIN = phasedActionTypes('main/DELETE_MAIN');
 
 // Action creators
 export const addMain = phasedActionCreators(ADD_MAIN);
 export const fetchMains = phasedActionCreators(FETCH_MAINS);
+export const fetchMain = phasedActionCreators(FETCH_MAIN);
 export const updateMain = phasedActionCreators(UPDATE_MAIN);
 export const deleteMain = phasedActionCreators(DELETE_MAIN);
 
@@ -19,40 +21,38 @@ export const deleteMain = phasedActionCreators(DELETE_MAIN);
 const initialState = {
   mains: [
     {
-      name: 'Salade niçoise 🥗',
-      description: 'Une salade faite à Nice',
-      DF_Price: 7.4,
+      name: 'Steak frites 🥩🍟',
+      description: 'Un steak avec des frites',
+      DF_Price: 14,
       VAT: 0.2,
-      quantity: 1000,
-      allergen: ['89712982091782091', '109209182901820981'],
+      quantity: 25,
+      allergen: ['9084090324', '8798320480234'],
       photo:
-        'https://img-3.journaldesfemmes.fr/QhgEdLZ0suRdfP7pAM6vG9ECfvo=/750x/smart/3a86b25b4fd94561959d9ff592bce391/recipe-jdf/10025061.jpg',
-      _id: '891728109831',
+        'https://media.blueapron.com/recipes/2121/square_newsletter_images/1490637106-4-0003-6001/403_2PRE07-steak-frites-18311_WEB_SQ_hi_res.jpg',
+      _id: '87982898094923',
     },
     {
-      name: 'Foie gras 🦆',
-      description:
-        'Il était une fois un foie se prêtant ma foi à une degustation foireuse.',
-      DF_Price: 10.3,
+      name: 'Tartiflette 🧀',
+      description: 'Du fromage à la patate avec des lardons, genre beaucoup.',
+      DF_Price: 17,
       VAT: 0.2,
-      quantity: 78,
+      quantity: 0,
       allergen: [],
       photo:
-        'https://static.fermedebeaumont.com/images/fermedebeaumont/mandarin-logo/mandarin4.jpg',
-      _id: '908098327467072',
+        'https://image.afcdn.com/recipe/20160401/38946_w1024h768c1cx2690cy1793.jpg',
+      _id: '90809832769787298427467072',
     },
 
     {
-      name: 'On a tenté un truc 🐐',
-      description:
-        "C'est la surprise (C'est un millefeuille… Avec de la betterave… et du fromage de chèvre…)",
-      DF_Price: 10.3,
+      name: 'Bœuf bourgignon 🥟',
+      description: "Comme l'indique l'emoji, c'est un sauté de canard laqué",
+      DF_Price: 15.5,
       VAT: 0.2,
       quantity: 2,
-      allergen: ['65129661278961726071', '7630729072096378672'],
+      allergen: ['89173987408293'],
       photo:
-        'https://www.papillesetpupilles.fr/wp-content/uploads/2010/03/Millefeuille-de-betterave-au-fromage-de-chevre-600x792.jpg',
-      _id: '75065673709092536',
+        'https://static.cuisineaz.com/610x610/i94631-boeuf-bourguignon.jpg',
+      _id: '90840932834234',
     },
   ],
   error: {},
@@ -62,6 +62,7 @@ const initialState = {
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_MAIN.success:
+    case FETCH_MAIN.success:
       return {
         ...state,
         mains: [...state.mains, action.payload],
@@ -85,6 +86,7 @@ const mainReducer = (state = initialState, action) => {
         mains: [...state.mains.filter((main) => main._id !== action.payload)],
       };
     case ADD_MAIN.failure:
+    case FETCH_MAIN.failure:
     case FETCH_MAINS.failure:
     case UPDATE_MAIN.failure:
     case DELETE_MAIN.failure:
