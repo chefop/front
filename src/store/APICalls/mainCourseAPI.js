@@ -13,8 +13,8 @@ export const fetchMainCourses = () => {
   return axios.get(`${API_URL}/mainCourses`);
 };
 
-export const updateMainCourse = (mainCourse) => {
-  return axios.patch(`${API_URL}/mainCourses/${mainCourse._id}`, mainCourse);
+export const updateMainCourse = ({ _id, ...mainCourse }) => {
+  return axios.patch(`${API_URL}/mainCourses/${_id}`, mainCourse);
 };
 
 export const deleteMainCourse = (mainCourseId) => {
