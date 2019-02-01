@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -16,22 +11,12 @@ import {
   AirlineSeatReclineNormal,
   TrendingUp,
 } from '@material-ui/icons';
-
-const drawerWidth = 240;
+import Header from '../components/Header';
+import List from '@material-ui/core/List';
 
 const styles = (theme) => ({
   root: {
     display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
   },
   content: {
     flexGrow: 1,
@@ -45,23 +30,7 @@ function Owner(props) {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Gérant
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
-        <div className={classes.toolbar} />
+      <Header title={'Gérant'}>
         <List>
           {['Commandes', 'Tables', 'Menus', 'Carte'].map((text, index) => (
             <ListItem button key={text}>
@@ -80,7 +49,7 @@ function Owner(props) {
             </ListItem>
           ))}
         </List>
-      </Drawer>
+      </Header>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>
