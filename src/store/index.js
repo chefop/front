@@ -6,7 +6,7 @@ import reducer from './ducks';
 import rootSaga from './ducks/rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
-const middlewares = [];
+const middlewares = [sagaMiddleware];
 
 export default function createInitialStore() {
   const store = createStore(
