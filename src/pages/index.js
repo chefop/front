@@ -9,7 +9,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import ROUTES from './index/constRoutes';
+import ROUTES from '../constants/constRoutes';
 import Board from './Board';
 import Home from './Home';
 import Login from './Login';
@@ -34,7 +34,7 @@ class App extends Component {
           <Route exact strict path={ROUTES.KITCHEN} component={Kitchen} />
           <Route exact strict path={ROUTES.CUSTOMER} component={Customer} />
           <Route exact strict path={ROUTES.ROOM} component={Room} />
-          {/*<Redirect to={ROUTES.HOME} />*/}
+          <Redirect to={ROUTES.HOME} />
         </Switch>
       </Router>
     );
