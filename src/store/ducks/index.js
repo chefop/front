@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 
 // Reducers
 import starterReducer from './starters';
-import mainReducer from './mains';
+import mainCourseReducer from './mainCourses';
 
 const reducers = combineReducers({
   starter: starterReducer,
-  main: mainReducer,
+  mainCourse: mainCourseReducer,
 });
 
 export default reducers;

@@ -4,22 +4,22 @@ import {
 } from '../../../utils/actionsHelper';
 
 // Action types
-export const ADD_MAIN = phasedActionTypes('main/ADD_MAIN');
-export const FETCH_MAIN = phasedActionTypes('main/FETCH_MAIN');
-export const FETCH_MAINS = phasedActionTypes('main/FETCH_MAINS');
-export const UPDATE_MAIN = phasedActionTypes('main/UPDATE_MAIN');
-export const DELETE_MAIN = phasedActionTypes('main/DELETE_MAIN');
+export const ADD_MAIN_COURSE = phasedActionTypes('main/ADD_MAIN_COURSE');
+export const FETCH_MAIN_COURSE = phasedActionTypes('main/FETCH_MAIN_COURSE');
+export const FETCH_MAIN_COURSES = phasedActionTypes('main/FETCH_MAIN_COURSES');
+export const UPDATE_MAIN_COURSE = phasedActionTypes('main/UPDATE_MAIN_COURSE');
+export const DELETE_MAIN_COURSE = phasedActionTypes('main/DELETE_MAIN_COURSE');
 
 // Action creators
-export const addMain = phasedActionCreators(ADD_MAIN);
-export const fetchMains = phasedActionCreators(FETCH_MAINS);
-export const fetchMain = phasedActionCreators(FETCH_MAIN);
-export const updateMain = phasedActionCreators(UPDATE_MAIN);
-export const deleteMain = phasedActionCreators(DELETE_MAIN);
+export const addMainCourse = phasedActionCreators(ADD_MAIN_COURSE);
+export const fetchMainCourses = phasedActionCreators(FETCH_MAIN_COURSES);
+export const fetchMainCourse = phasedActionCreators(FETCH_MAIN_COURSE);
+export const updateMainCourse = phasedActionCreators(UPDATE_MAIN_COURSE);
+export const deleteMainCourse = phasedActionCreators(DELETE_MAIN_COURSE);
 
 // Initial State
 const initialState = {
-  mains: [
+  mainCourses: [
     {
       name: 'Steak frites 🥩🍟',
       description: 'Un steak avec des frites',
@@ -59,37 +59,43 @@ const initialState = {
 };
 
 // Reducer
-const mainReducer = (state = initialState, action) => {
+const mainCourseReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_MAIN.success:
-    case FETCH_MAIN.success:
+    case ADD_MAIN_COURSE.success:
+    case FETCH_MAIN_COURSE.success:
       return {
         ...state,
-        mains: [...state.mains, action.payload],
+        mainCourses: [...state.mainCourses, action.payload],
       };
-    case FETCH_MAINS.success:
+    case FETCH_MAIN_COURSES.success:
       return {
         ...state,
-        mains: action.payload,
+        mainCourses: action.payload,
       };
-    case UPDATE_MAIN.success:
+    case UPDATE_MAIN_COURSE.success:
       return {
         ...state,
-        mains: [
-          ...state.mains.filter((main) => main._id !== action.payload._id),
+        mainCourses: [
+          ...state.mainCourses.filter(
+            (mainCourse) => mainCourse._id !== action.payload._id,
+          ),
           action.payload,
         ],
       };
-    case DELETE_MAIN.success:
+    case DELETE_MAIN_COURSE.success:
       return {
         ...state,
-        mains: [...state.mains.filter((main) => main._id !== action.payload)],
+        mainCourses: [
+          ...state.mainCourses.filter(
+            (mainCourse) => mainCourse._id !== action.payload,
+          ),
+        ],
       };
-    case ADD_MAIN.failure:
-    case FETCH_MAIN.failure:
-    case FETCH_MAINS.failure:
-    case UPDATE_MAIN.failure:
-    case DELETE_MAIN.failure:
+    case ADD_MAIN_COURSE.failure:
+    case FETCH_MAIN_COURSE.failure:
+    case FETCH_MAIN_COURSES.failure:
+    case UPDATE_MAIN_COURSE.failure:
+    case DELETE_MAIN_COURSE.failure:
       return {
         ...state,
         error: action.payload,
@@ -99,4 +105,4 @@ const mainReducer = (state = initialState, action) => {
   }
 };
 
-export default mainReducer;
+export default mainCourseReducer;
