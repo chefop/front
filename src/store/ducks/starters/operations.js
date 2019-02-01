@@ -1,4 +1,4 @@
-import { call, fork, put, takeLatest, all, select } from 'redux-saga/effects';
+import { call, fork, put, takeLatest, all } from 'redux-saga/effects';
 
 // Import action types
 import { ADD_STARTER, FETCH_STARTERS, UPDATE_STARTER } from '.';
