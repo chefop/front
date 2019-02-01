@@ -1,10 +1,22 @@
 import { call, fork, put, takeLatest, all } from 'redux-saga/effects';
 
 // Import action types
-import { ADD_STARTER, FETCH_STARTERS, UPDATE_STARTER, DELETE_STARTER } from '.';
+import {
+  ADD_STARTER,
+  FETCH_STARTERS,
+  UPDATE_STARTER,
+  DELETE_STARTER,
+  FETCH_STARTER,
+} from '.';
 
 // Import action Creators
-import { addStarter, fetchStarters, updateStarter, deleteStarter } from '.';
+import {
+  addStarter,
+  fetchStarters,
+  updateStarter,
+  deleteStarter,
+  fetchStarter,
+} from '.';
 
 import * as starterAPI from '../../APICalls/starterAPI';
 
@@ -23,6 +35,18 @@ function* addStarterWorker(action) {
 }
 
 function* fetchStarterWorker() {
+  try {
+    const res = yield call(starterAPI.fetchStarter);
+    if (res.status === 200) {
+      const starter = res.data.starter;
+      yield put(fetchStarter.success(starter));
+    }
+  } catch (err) {
+    yield put(fetchStarter.failure(err.message));
+  }
+}
+
+function* fetchStartersWorker() {
   try {
     const res = yield call(starterAPI.fetchStarters);
     if (res.status === 200) {
@@ -65,8 +89,12 @@ function* addStarterSaga() {
   yield takeLatest(ADD_STARTER.request, addStarterWorker);
 }
 
+function* fetchStarterSaga() {
+  yield takeLatest(FETCH_STARTER.request, fetchStarterWorker);
+}
+
 function* fetchStartersSaga() {
-  yield takeLatest(FETCH_STARTERS.request, fetchStarterWorker);
+  yield takeLatest(FETCH_STARTERS.request, fetchStartersWorker);
 }
 
 function* updateStarterSaga() {
@@ -81,6 +109,7 @@ function* deleteStarterSaga() {
 export default function* starterSagas() {
   yield all(
     [fork(addStarterSaga)],
+    [fork(fetchStarterSaga)],
     [fork(fetchStartersSaga)],
     [fork(updateStarterSaga)],
     [fork(deleteStarterSaga)],

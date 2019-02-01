@@ -5,6 +5,10 @@ export const createStarter = (starter) => {
   return axios.post(`${API_URL}/starters`, starter);
 };
 
+export const fetchStarter = (starterId) => {
+  return axios.get(`${API_URL}/starters${starterId}`);
+};
+
 export const fetchStarters = () => {
   return axios.get(`${API_URL}/starters`);
 };
