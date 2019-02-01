@@ -7,11 +7,13 @@ import {
 export const ADD_STARTER = phasedActionTypes('starter/ADD_STARTER');
 export const FETCH_STARTERS = phasedActionTypes('starter/FETCH_STARTER');
 export const UPDATE_STARTER = phasedActionTypes('starter/UPDATE_STARTER');
+export const DELETE_STARTER = phasedActionTypes('starter/DELETE_STARTER');
 
 // Action creators
 export const addStarter = phasedActionCreators(ADD_STARTER);
 export const fetchStarters = phasedActionCreators(FETCH_STARTERS);
 export const updateStarter = phasedActionCreators(UPDATE_STARTER);
+export const deleteStarter = phasedActionCreators(DELETE_STARTER);
 
 // Initial State
 const initialState = {
@@ -79,9 +81,17 @@ const starterReducer = (state = initialState, action) => {
           action.payload,
         ],
       };
+    case DELETE_STARTER.success:
+      return {
+        ...state,
+        starters: [
+          ...state.starters.filter((starter) => starter._id !== action.payload),
+        ],
+      };
     case ADD_STARTER.failure:
     case FETCH_STARTERS.failure:
     case UPDATE_STARTER.failure:
+    case DELETE_STARTER.failure:
       return {
         ...state,
         error: action.payload,

@@ -12,3 +12,7 @@ export const fetchStarters = () => {
 export const updateStarter = (starter) => {
   return axios.patch(`${API_URL}/starters/${starter._id}`, starter);
 };
+
+export const deleteStarter = (starterId) => {
+  return axios.delete(`${API_URL}/starters/${starterId}`);
+};
