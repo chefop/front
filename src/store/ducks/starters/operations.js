@@ -63,7 +63,7 @@ function* updateStarterWorker(action) {
     const starter = action.payload;
     const res = yield call(starterAPI.updateStarter, starter);
     if (res.status === 200) {
-      const starter = res.data.starters;
+      const starter = res.data.starter;
       yield put(updateStarter.success(starter));
     }
   } catch (err) {

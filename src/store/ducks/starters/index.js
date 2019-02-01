@@ -6,7 +6,7 @@ import {
 // Action types
 export const ADD_STARTER = phasedActionTypes('starter/ADD_STARTER');
 export const FETCH_STARTER = phasedActionTypes('starter/FETCH_STARTER');
-export const FETCH_STARTERS = phasedActionTypes('starter/FETCH_STARTERs');
+export const FETCH_STARTERS = phasedActionTypes('starter/FETCH_STARTERS');
 export const UPDATE_STARTER = phasedActionTypes('starter/UPDATE_STARTER');
 export const DELETE_STARTER = phasedActionTypes('starter/DELETE_STARTER');
 
