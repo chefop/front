@@ -4,9 +4,15 @@ import {
 } from '../../../utils/actionsHelper';
 
 // Action Types
+export const ADD_DRINK = phasedActionTypes('drink/CREATE_DRINK');
+export const FETCH_DRINKS = phasedActionTypes('drink/FETCH_DRINKS');
+export const UPDATE_DRINK = phasedActionTypes('drink/UPDATE_DRINK');
 export const DELETE_DRINK = phasedActionTypes('drink/DELETE_DRINK');
 
 // Action Creators
+export const addDrink = phasedActionCreators(ADD_DRINK);
+export const fetchDrinks = phasedActionCreators(FETCH_DRINKS);
+export const updateDrink = phasedActionCreators(UPDATE_DRINK);
 export const deleteDrink = phasedActionCreators(DELETE_DRINK);
 
 // Initial State
@@ -16,8 +22,8 @@ const initialState = {
       _id: '6598760982783890273',
       name: 'Ricard ☀️',
       description: "De l'eau et du bonheur",
-      df_price: '1.5',
-      vat: 20,
+      dfPrice: '1.5',
+      vat: 0.2,
       quantity: 15,
       allergen: [],
       photo:
@@ -31,7 +37,7 @@ const initialState = {
       _id: '798273089389023',
       name: 'San Pellegrino 🌊',
       description: 'Pour le Ricard',
-      df_price: '1.5',
+      dfPrice: '1.5',
       vat: 20,
       quantity: 789,
       allergen: [],
@@ -48,6 +54,24 @@ const initialState = {
 // Reducer
 const drinkReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_DRINK.success:
+      return {
+        ...state,
+        drinks: [...state.drinks, action.payload],
+      };
+    case FETCH_DRINKS.success:
+      return {
+        ...state,
+        drinks: action.payload,
+      };
+    case UPDATE_DRINK:
+      return {
+        ...state,
+        drinks: [
+          ...state.drinks.filter((drink) => drink._id !== action.payload),
+          action.payload,
+        ],
+      };
     case DELETE_DRINK.success:
       return {
         ...state,
@@ -55,6 +79,9 @@ const drinkReducer = (state = initialState, action) => {
           ...state.drinks.filter((drink) => drink._id !== action.payload),
         ],
       };
+    case ADD_DRINK.failure:
+    case FETCH_DRINKS.failure:
+    case UPDATE_DRINK.failure:
     case DELETE_DRINK.failure:
       return {
         ...state,
