@@ -71,7 +71,7 @@ const dessertReducer = (state = initialState, action) => {
         ...state,
         desserts: [
           ...state.desserts.filter(
-            (desserts) => desserts._id !== action.payload._id,
+            (desserts) => desserts._id !== action.payload,
           ),
         ],
       };
