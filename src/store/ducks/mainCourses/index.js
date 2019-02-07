@@ -24,7 +24,7 @@ const initialState = {
       name: 'Steak frites 🥩🍟',
       description: 'Un steak avec des frites',
       dfPrice: 14,
-      VAT: 0.2,
+      vat: 0.2,
       quantity: 25,
       allergen: ['9084090324', '8798320480234'],
       photo:
@@ -35,7 +35,7 @@ const initialState = {
       name: 'Tartiflette 🧀',
       description: 'Du fromage à la patate avec des lardons, genre beaucoup.',
       dfPrice: 17,
-      VAT: 0.2,
+      vat: 0.2,
       quantity: 0,
       allergen: [],
       photo:
@@ -46,7 +46,7 @@ const initialState = {
     {
       name: 'Bœuf bourgignon 🥟',
       description: "Comme l'indique l'emoji, c'est un sauté de canard laqué",
-      dfPrice: 15.5,
+      DF_Price: 15.5,
       VAT: 0.2,
       quantity: 2,
       allergen: ['89173987408293'],
