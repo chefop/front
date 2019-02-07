@@ -23,8 +23,8 @@ const initialState = {
     {
       name: 'Steak frites 🥩🍟',
       description: 'Un steak avec des frites',
-      DF_Price: 14,
-      VAT: 0.2,
+      dfPrice: 14,
+      vat: 0.2,
       quantity: 25,
       allergen: ['9084090324', '8798320480234'],
       photo:
@@ -34,8 +34,8 @@ const initialState = {
     {
       name: 'Tartiflette 🧀',
       description: 'Du fromage à la patate avec des lardons, genre beaucoup.',
-      DF_Price: 17,
-      VAT: 0.2,
+      dfPrice: 17,
+      vat: 0.2,
       quantity: 0,
       allergen: [],
       photo:
