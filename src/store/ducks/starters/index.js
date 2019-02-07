@@ -23,8 +23,8 @@ const initialState = {
     {
       name: 'Salade niçoise 🥗',
       description: 'Une salade faite à Nice',
-      DF_Price: 7.4,
-      VAT: 0.2,
+      dfPrice: 7.4,
+      vat: 0.2,
       quantity: 1000,
       allergen: ['89712982091782091', '109209182901820981'],
       photo:
@@ -35,8 +35,8 @@ const initialState = {
       name: 'Foie gras 🦆',
       description:
         'Il était une fois un foie se prêtant ma foi à une degustation foireuse.',
-      DF_Price: 10.3,
-      VAT: 0.2,
+      dfPrice: 10.3,
+      vat: 0.2,
       quantity: 78,
       allergen: [],
       photo:
@@ -48,8 +48,8 @@ const initialState = {
       name: 'On a tenté un truc 🐐',
       description:
         "C'est la surprise (C'est un millefeuille… Avec de la betterave… et du fromage de chèvre…)",
-      DF_Price: 10.3,
-      VAT: 0.2,
+      dfPrice: 10.3,
+      vat: 0.2,
       quantity: 2,
       allergen: ['65129661278961726071', '7630729072096378672'],
       photo:
