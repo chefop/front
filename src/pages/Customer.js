@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { DeveloperBoard, Fastfood, Assignment } from '@material-ui/icons';
 import Header from '../components/Header';
 import { fetchStarters } from '../store/ducks/starters';
-import ProductTabs from '../components/products/ProductTabs';
+import ProductTabs from './customer/ProductTabs';
 
 const styles = (theme) => ({
   root: {
