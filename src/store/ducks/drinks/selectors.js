@@ -1,1 +1,1 @@
-export const getDrinks = (state) => state.drinks.drinks;
+export const getDrinks = (state) => state.drink.drinks;

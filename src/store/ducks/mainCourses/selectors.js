@@ -1,1 +1,1 @@
-export const getMainCourses = (state) => state.mainCourses.mainCourses;
+export const getMainCourses = (state) => state.mainCourse.mainCourses;
