@@ -49,7 +49,7 @@ class ProductCard extends Component {
           <Typography gutterBottom variant="h5" component="h2">
             {name}
           </Typography>
-          <Typography component="p" gutterBottom>
+          <Typography component="p" gutterBottom style={{ minHeight: 40 }}>
             {description}
           </Typography>
         </CardContent>

@@ -4,7 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import StartersList from '../../components/StartersList';
+import { getMainCourses } from '../../store/ducks/mainCourses/selectors';
+import { connect } from 'react-redux';
+import { getStarters } from '../../store/ducks/starters/selectors';
+import { getDesserts } from '../../store/ducks/desserts/selectors';
+import { getDrinks } from '../../store/ducks/drinks/selectors';
+import ProdcutsList from '../../components/ProductsList';
 
 const styles = {
   root: {
@@ -22,7 +27,7 @@ class ProductTabs extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, starters, mainCourses, desserts, drinks } = this.props;
     const { value } = this.state;
 
     return (
@@ -41,14 +46,26 @@ class ProductTabs extends React.Component {
             <Tab label="Boissons" />
           </Tabs>
         </Paper>
-        {value === 0 && <StartersList />}
+        {value === 0 && <ProdcutsList products={starters} />}
+        {value === 1 && <ProdcutsList products={mainCourses} />}
+        {value === 2 && <ProdcutsList products={desserts} />}
+        {value === 3 && <ProdcutsList products={drinks} />}
       </>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    starters: getStarters(state),
+    mainCourses: getMainCourses(state),
+    desserts: getDesserts(state),
+    drinks: getDrinks(state),
+  };
+};
+
 ProductTabs.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ProductTabs);
+export default connect(mapStateToProps)(withStyles(styles)(ProductTabs));

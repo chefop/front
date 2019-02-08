@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import { getStarters } from '../store/ducks/starters/selectors';
 import ProductCard from './ProductCard';
 
 const styles = () => ({
@@ -12,20 +10,14 @@ const styles = () => ({
   },
 });
 
-class StartersList extends Component {
+class ProdcutsList extends Component {
   render() {
-    const { starters, classes } = this.props;
+    const { products, classes } = this.props;
 
     return (
       <div style={{ marginTop: 24 }}>
-        <Grid
-          container
-          spacing={24}
-          className={classes.root}
-          direction="row"
-          justify="space-between"
-        >
-          {starters.map(
+        <Grid container spacing={24} className={classes.root} direction="row">
+          {products.map(
             (
               { photo, name, description, dfPrice, vat, quantity, allergen },
               index,
@@ -51,15 +43,9 @@ class StartersList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    starters: getStarters(state),
-  };
-};
-
-StartersList.propTypes = {
+ProdcutsList.propTypes = {
   classes: PropTypes.object.isRequired,
   expanded: PropTypes.oneOf([PropTypes.string, false, null]),
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(StartersList));
+export default withStyles(styles)(ProdcutsList);
