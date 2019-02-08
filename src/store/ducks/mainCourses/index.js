@@ -44,8 +44,8 @@ const initialState = {
     {
       name: 'Bœuf bourgignon 🥟',
       description: "Comme l'indique l'emoji, c'est un sauté de canard laqué",
-      DF_Price: 15.5,
-      VAT: 0.2,
+      dfPrice: 15.5,
+      vat: 0.2,
       quantity: 2,
       allergen: ['89173987408293'],
       photo:
