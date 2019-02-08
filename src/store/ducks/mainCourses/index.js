@@ -40,7 +40,6 @@ const initialState = {
         'https://image.afcdn.com/recipe/20160401/38946_w1024h768c1cx2690cy1793.jpg',
       _id: '90809832769787298427467072',
     },
-
     {
       name: 'Bœuf bourgignon 🥟',
       description: "Comme l'indique l'emoji, c'est un sauté de canard laqué",
