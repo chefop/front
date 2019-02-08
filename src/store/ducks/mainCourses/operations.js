@@ -6,7 +6,6 @@ import {
   FETCH_MAIN_COURSES,
   UPDATE_MAIN_COURSE,
   DELETE_MAIN_COURSE,
-  FETCH_MAIN_COURSE,
 } from '.';
 
 // Import action Creators
@@ -15,7 +14,6 @@ import {
   fetchMainCourses,
   updateMainCourse,
   deleteMainCourse,
-  fetchMainCourse,
 } from '.';
 
 import * as mainCourseAPI from '../../APICalls/mainCourseAPI';
@@ -43,18 +41,6 @@ function* fetchMainCoursesWorker() {
     }
   } catch (err) {
     yield put(fetchMainCourses.failure(err.message));
-  }
-}
-
-function* fetchMainCourseWorker() {
-  try {
-    const res = yield call(mainCourseAPI.fetchMainCourse);
-    if (res.status === 200) {
-      const mainCourse = res.data.mainCourse;
-      yield put(fetchMainCourse.success(mainCourse));
-    }
-  } catch (err) {
-    yield put(fetchMainCourse.failure(err.message));
   }
 }
 
@@ -89,10 +75,6 @@ function* addMainCourseSaga() {
   yield takeLatest(ADD_MAIN_COURSE.request, addMainCourseWorker);
 }
 
-function* fetchMainCourseSaga() {
-  yield takeLatest(FETCH_MAIN_COURSE.request, fetchMainCourseWorker);
-}
-
 function* fetchMainCoursesSaga() {
   yield takeLatest(FETCH_MAIN_COURSES.request, fetchMainCoursesWorker);
 }
@@ -107,11 +89,10 @@ function* deleteMainCourseSaga() {
 
 // Export watchers
 export default function* mainCourseSagas() {
-  yield all(
-    [fork(addMainCourseSaga)],
-    [fork(fetchMainCoursesSaga)],
-    [fork(fetchMainCourseSaga)],
-    [fork(updateMainCourseSaga)],
-    [fork(deleteMainCourseSaga)],
-  );
+  yield all([
+    fork(addMainCourseSaga),
+    fork(fetchMainCoursesSaga),
+    fork(updateMainCourseSaga),
+    fork(deleteMainCourseSaga),
+  ]);
 }

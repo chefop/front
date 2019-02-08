@@ -5,7 +5,6 @@ import {
 
 // Action types
 export const ADD_MAIN_COURSE = phasedActionTypes('main/ADD_MAIN_COURSE');
-export const FETCH_MAIN_COURSE = phasedActionTypes('main/FETCH_MAIN_COURSE');
 export const FETCH_MAIN_COURSES = phasedActionTypes('main/FETCH_MAIN_COURSES');
 export const UPDATE_MAIN_COURSE = phasedActionTypes('main/UPDATE_MAIN_COURSE');
 export const DELETE_MAIN_COURSE = phasedActionTypes('main/DELETE_MAIN_COURSE');
@@ -13,7 +12,6 @@ export const DELETE_MAIN_COURSE = phasedActionTypes('main/DELETE_MAIN_COURSE');
 // Action creators
 export const addMainCourse = phasedActionCreators(ADD_MAIN_COURSE);
 export const fetchMainCourses = phasedActionCreators(FETCH_MAIN_COURSES);
-export const fetchMainCourse = phasedActionCreators(FETCH_MAIN_COURSE);
 export const updateMainCourse = phasedActionCreators(UPDATE_MAIN_COURSE);
 export const deleteMainCourse = phasedActionCreators(DELETE_MAIN_COURSE);
 
@@ -62,7 +60,6 @@ const initialState = {
 const mainCourseReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_MAIN_COURSE.success:
-    case FETCH_MAIN_COURSE.success:
       return {
         ...state,
         mainCourses: [...state.mainCourses, action.payload],
@@ -92,7 +89,6 @@ const mainCourseReducer = (state = initialState, action) => {
         ],
       };
     case ADD_MAIN_COURSE.failure:
-    case FETCH_MAIN_COURSE.failure:
     case FETCH_MAIN_COURSES.failure:
     case UPDATE_MAIN_COURSE.failure:
     case DELETE_MAIN_COURSE.failure:

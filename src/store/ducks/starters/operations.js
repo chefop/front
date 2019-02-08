@@ -79,10 +79,10 @@ export function* deleteStarterSaga() {
 
 // Export watchers
 export default function* starterSagas() {
-  yield all(
-    [fork(addStarterSaga)],
-    [fork(fetchStartersSaga)],
-    [fork(updateStarterSaga)],
-    [fork(deleteStarterSaga)],
-  );
+  yield all([
+    fork(addStarterSaga),
+    fork(fetchStartersSaga),
+    fork(updateStarterSaga),
+    fork(deleteStarterSaga),
+  ]);
 }
