@@ -39,7 +39,7 @@ function* fetchDrinksWorker() {
   try {
     const res = yield call(drinkAPI.fetchDrinks);
     if (res.status === 200) {
-      const drinks = res.data.drinks;
+      const drinks = res.data.drink;
       yield put(fetchDrinks.success(drinks));
     }
   } catch (err) {

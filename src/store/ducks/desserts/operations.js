@@ -14,8 +14,8 @@ function* addDessertWorker(action) {
     const dessert = action.payload;
     const res = yield call(dessertAPI.createDessert, dessert);
     if (res.status === 200) {
-      const dessert = res.data.starter;
-      yield put(addDessert.success(dessert()));
+      const dessert = res.data.dessert;
+      yield put(addDessert.success(dessert));
     }
   } catch (err) {
     yield put(addDessert.failure(err.message));
@@ -26,8 +26,8 @@ function* fetchDessertsWorker() {
   try {
     const res = yield call(dessertAPI.fetchDesserts);
     if (res.status === 200) {
-      const dessert = res.data.starter;
-      yield put(fetchDesserts.success(dessert()));
+      const dessert = res.data.dessert;
+      yield put(fetchDesserts.success(dessert));
     }
   } catch (err) {
     yield put(fetchDesserts.failure(err.message));
@@ -39,8 +39,8 @@ function* updateDessertWorker(action) {
     const dessert = action.payload;
     const res = yield call(dessertAPI.updateDessert, dessert);
     if (res.status === 200) {
-      const dessert = res.data.starter;
-      yield put(updateDessert.success(dessert()));
+      const dessert = res.data.dessert;
+      yield put(updateDessert.success(dessert));
     }
   } catch (err) {
     yield put(updateDessert.failure(err.message));
@@ -52,8 +52,8 @@ function* deleteDessertWorker(action) {
     const dessert = action.payload;
     const res = yield call(dessertAPI.deleteDessert, dessert);
     if (res.status === 200) {
-      const dessert = res.data.starter;
-      yield put(deleteDessert.success(dessert()));
+      const dessert = res.data.dessert;
+      yield put(deleteDessert.success(dessert._id));
     }
   } catch (err) {
     yield put(deleteDessert.failure(err.message));

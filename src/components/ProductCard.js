@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ModalCustom from '../ModalCustom';
+import ModalCustom from './ModalCustom';
 
 const styles = () => ({
   card: {
@@ -49,7 +49,7 @@ class ProductCard extends Component {
           <Typography gutterBottom variant="h5" component="h2">
             {name}
           </Typography>
-          <Typography component="p" gutterBottom>
+          <Typography component="p" gutterBottom style={{ minHeight: 40 }}>
             {description}
           </Typography>
         </CardContent>
