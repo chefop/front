@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { connect } from 'react-redux';
-import { getStarters } from '../../store/ducks/starters/selectors';
 import Grid from '@material-ui/core/Grid';
-import ProductCard from '../../components/products/ProductCard';
+import { getStarters } from '../store/ducks/starters/selectors';
+import ProductCard from './ProductCard';
 
 const styles = () => ({
   root: {
