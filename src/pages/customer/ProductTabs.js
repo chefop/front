@@ -1,15 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { getMainCourses } from '../../store/ducks/mainCourses/selectors';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import ProductsList from '../../components/ProductsList';
 import { getStarters } from '../../store/ducks/starters/selectors';
 import { getDesserts } from '../../store/ducks/desserts/selectors';
+import { getMainCourses } from '../../store/ducks/mainCourses/selectors';
 import { getDrinks } from '../../store/ducks/drinks/selectors';
-import ProdcutsList from '../../components/ProductsList';
+import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core';
 
 const styles = {
   root: {
@@ -46,10 +46,10 @@ class ProductTabs extends React.Component {
             <Tab label="Boissons" />
           </Tabs>
         </Paper>
-        {value === 0 && <ProdcutsList products={starters} />}
-        {value === 1 && <ProdcutsList products={mainCourses} />}
-        {value === 2 && <ProdcutsList products={desserts} />}
-        {value === 3 && <ProdcutsList products={drinks} />}
+        {value === 0 && <ProductsList products={starters} />}
+        {value === 1 && <ProductsList products={mainCourses} />}
+        {value === 2 && <ProductsList products={desserts} />}
+        {value === 3 && <ProductsList products={drinks} />}
       </>
     );
   }

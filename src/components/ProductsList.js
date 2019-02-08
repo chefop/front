@@ -10,7 +10,7 @@ const styles = () => ({
   },
 });
 
-class ProdcutsList extends Component {
+class ProductsList extends Component {
   render() {
     const { products, classes } = this.props;
 
@@ -43,9 +43,9 @@ class ProdcutsList extends Component {
   }
 }
 
-ProdcutsList.propTypes = {
+ProductsList.propTypes = {
   classes: PropTypes.object.isRequired,
   expanded: PropTypes.oneOf([PropTypes.string, false, null]),
 };
 
-export default withStyles(styles)(ProdcutsList);
+export default withStyles(styles)(ProductsList);
