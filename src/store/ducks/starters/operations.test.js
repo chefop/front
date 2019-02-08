@@ -1,3 +1,4 @@
+import { fork } from 'redux-saga/effects';
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -25,6 +26,8 @@ import {
 } from './operations';
 
 import * as starterAPI from '../../APICalls/starterAPI';
+
+import starterSagas from './operations';
 
 // WORKERS
 it('add a starter', () => {
@@ -190,6 +193,20 @@ it('should calls the deleteStarterWorker', () => {
   testSaga(deleteStarterSaga)
     .next()
     .takeLatest(DELETE_STARTER.request, deleteStarterWorker)
+
+    .finish()
+    .isDone();
+});
+
+it('should calls the starter sagas', () => {
+  testSaga(starterSagas)
+    .next()
+    .all([
+      fork(addStarterSaga),
+      fork(fetchStartersSaga),
+      fork(updateStarterSaga),
+      fork(deleteStarterSaga),
+    ])
 
     .finish()
     .isDone();

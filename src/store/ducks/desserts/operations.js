@@ -79,10 +79,10 @@ function* deleteDessertSaga() {
 
 // Export watchers
 export default function* dessertSagas() {
-  yield all(
-    [fork(addDessertSaga)],
-    [fork(fetchDessertsSaga)],
-    [fork(updateDessertSaga)],
-    [fork(deleteDessertSaga)],
-  );
+  yield all([
+    fork(addDessertSaga),
+    fork(fetchDessertsSaga),
+    fork(updateDessertSaga),
+    fork(deleteDessertSaga),
+  ]);
 }
