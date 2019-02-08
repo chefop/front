@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import ProductCard from './ProductCard';
-import { getMainCourses } from '../store/ducks/mainCourses/selectors';
 
 const styles = () => ({
   root: {
@@ -12,20 +10,14 @@ const styles = () => ({
   },
 });
 
-class MainCoursesList extends Component {
+class ProdcutsList extends Component {
   render() {
-    const { mainCourses, classes } = this.props;
+    const { products, classes } = this.props;
 
     return (
       <div style={{ marginTop: 24 }}>
-        <Grid
-          container
-          spacing={24}
-          className={classes.root}
-          direction="row"
-          justify="space-between"
-        >
-          {mainCourses.map(
+        <Grid container spacing={24} className={classes.root} direction="row">
+          {products.map(
             (
               { photo, name, description, dfPrice, vat, quantity, allergen },
               index,
@@ -51,15 +43,9 @@ class MainCoursesList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    mainCourses: getMainCourses(state),
-  };
-};
-
-MainCoursesList.propTypes = {
+ProdcutsList.propTypes = {
   classes: PropTypes.object.isRequired,
   expanded: PropTypes.oneOf([PropTypes.string, false, null]),
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(MainCoursesList));
+export default withStyles(styles)(ProdcutsList);
