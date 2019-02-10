@@ -44,16 +44,25 @@ describe('phased action type', () => {
 
 describe('phased action creator', () => {
   it('should returns object with 3 action creator states', () => {
-    expect(
-      phasedActionCreators({
-        request: 'ACTION_REQUEST',
-        success: 'ACTION_SUCCESS',
-        failure: 'ACTION_FAILURE',
-      }),
-    ).toEqual({
-      request: expect.any(Function),
-      success: expect.any(Function),
-      failure: expect.any(Function),
+    const { request, success, failure } = phasedActionCreators({
+      request: 'ACTION_REQUEST',
+      success: 'ACTION_SUCCESS',
+      failure: 'ACTION_FAILURE',
+    });
+    expect(request('payload')).toEqual({
+      type: 'ACTION_REQUEST',
+      payload: 'payload',
+    });
+
+    expect(success('payload')).toEqual({
+      type: 'ACTION_SUCCESS',
+      payload: 'payload',
+    });
+
+    expect(failure('error')).toEqual({
+      type: 'ACTION_FAILURE',
+      payload: 'error',
+      error: true,
     });
   });
 });
