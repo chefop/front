@@ -1,3 +1,4 @@
+import { name as PROJECT_NAME } from '../../package.json';
 import {
   actionCreator,
   actionTypes,
@@ -12,6 +13,14 @@ describe('action type', () => {
 });
 
 describe('action creator', () => {
+  it('sould returns action with type payload and error', () => {
+    expect(actionCreator('ACTION', 'payload', true)).toEqual({
+      type: 'ACTION',
+      payload: 'payload',
+      error: true,
+    });
+  });
+
   it('sould returns action with only type', () => {
     expect(actionCreator('ACTION')).toEqual({ type: 'ACTION' });
   });
@@ -22,28 +31,34 @@ describe('action creator', () => {
       payload: 'payload',
     });
   });
-
-  it('sould returns action with type payload and error', () => {
-    expect(actionCreator('ACTION', 'payload', true)).toEqual({
-      type: 'ACTION',
-      payload: 'payload',
-      error: true,
-    });
-  });
 });
 
 describe('phased action type', () => {
   it('sould returns object with 3 states', () => {
     expect(phasedActionTypes('ACTION')).toEqual({
-      request: 'front/ACTION_REQUEST',
-      success: 'front/ACTION_SUCCESS',
-      failure: 'front/ACTION_FAILURE',
+      request: `${PROJECT_NAME}/ACTION_REQUEST`,
+      success: `${PROJECT_NAME}/ACTION_SUCCESS`,
+      failure: `${PROJECT_NAME}/ACTION_FAILURE`,
     });
   });
 });
 
 describe('phased action creator', () => {
-  it('should returns object with 3 action creator states', () => {
+  it('should returns object with 3 properties', () => {
+    expect(
+      phasedActionCreators({
+        request: 'ACTION_REQUEST',
+        success: 'ACTION_SUCCESS',
+        failure: 'ACTION_FAILURE',
+      }),
+    ).toEqual({
+      request: expect.any(Function),
+      success: expect.any(Function),
+      failure: expect.any(Function),
+    });
+  });
+
+  it('should returns 3 action creator', () => {
     const { request, success, failure } = phasedActionCreators({
       request: 'ACTION_REQUEST',
       success: 'ACTION_SUCCESS',
