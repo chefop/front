@@ -8,7 +8,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { DeveloperBoard, Fastfood, Assignment } from '@material-ui/icons';
 import Header from '../components/Header';
 import { fetchStarters } from '../store/ducks/starters';
-import ProductTabs from './customer/ProductTabs';
+import SUB_VIEWS from '../constants/constSubViews';
+import VIEWS from '../constants/constViews';
+import ProductTabs from '../components/ProductTabs';
 
 const styles = (theme) => ({
   root: {
@@ -21,9 +23,7 @@ const styles = (theme) => ({
   toolbar: theme.mixins.toolbar,
 });
 
-const MENU = 'MENU';
-const CARTE = 'CARTE';
-const COMMANDE = 'COMMANDE';
+const { CARTE, MENUS, COMMANDE } = SUB_VIEWS;
 
 class Customer extends Component {
   state = {
@@ -48,7 +48,7 @@ class Customer extends Component {
           <List>
             {[
               { text: 'Carte', view: CARTE },
-              { text: 'Menus', view: MENU },
+              { text: 'Menus', view: MENUS },
               { text: 'Commande', view: COMMANDE },
             ].map(({ text, view }, index) => (
               <ListItem button key={text} onClick={() => this.changeView(view)}>
@@ -68,7 +68,13 @@ class Customer extends Component {
         </Header>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          {view === CARTE ? <ProductTabs /> : view === MENU ? '' : ''}
+          {view === CARTE ? (
+            <ProductTabs caller={VIEWS.CUSTOMER} />
+          ) : view === MENUS ? (
+            ''
+          ) : (
+            ''
+          )}
         </main>
       </div>
     );

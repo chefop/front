@@ -1,0 +1,9 @@
+const SUB_VIEWS = {
+  MENUS: 'MENUS',
+  CARTE: 'CARTE',
+  COMMANDE: 'COMMANDE',
+  COMMANDES: 'COMMANDES',
+  TABLES: 'TABLES',
+};
+
+export default SUB_VIEWS;

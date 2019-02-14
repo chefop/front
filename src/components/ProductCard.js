@@ -11,6 +11,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ModalCustom from './ModalCustom';
+import VIEWS from '../constants/constViews';
 
 const styles = () => ({
   card: {
@@ -36,6 +37,7 @@ class ProductCard extends Component {
       vat,
       quantity,
       allergen,
+      caller,
     } = this.props;
 
     const price = (dfPrice * (1 + vat)).toFixed(2);
@@ -46,12 +48,21 @@ class ProductCard extends Component {
       <Card className={classes.card}>
         <CardMedia className={classes.media} image={photo} title={name} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h1">
             {name}
           </Typography>
           <Typography component="p" gutterBottom style={{ minHeight: 40 }}>
             {description}
           </Typography>
+          {caller === VIEWS.OWNER && (
+            <Typography component="span" variant="h6" gutterBottom>
+              {quantity > 1
+                ? `${quantity} restants`
+                : quantity < 1
+                ? 'Hors stock'
+                : `${quantity} restant`}
+            </Typography>
+          )}
         </CardContent>
         <div style={{ marginLeft: '8px' }}>
           <ModalCustom
@@ -77,14 +88,20 @@ class ProductCard extends Component {
               currency: 'EUR',
             }).format(price)}
           </Typography>
-          <Button
-            size="small"
-            color="primary"
-            style={{ marginLeft: 'auto' }}
-            {...quantity === 0 && { disabled: true }}
-          >
-            Ajouter
-          </Button>
+          {caller === VIEWS.CUSTOMER ? (
+            <Button
+              size="small"
+              color="primary"
+              style={{ marginLeft: 'auto' }}
+              {...quantity === 0 && { disabled: true }}
+            >
+              Ajouter
+            </Button>
+          ) : (
+            <Button size="small" color="primary" style={{ marginLeft: 'auto' }}>
+              Modifier
+            </Button>
+          )}
         </CardActions>
       </Card>
     );
@@ -100,6 +117,7 @@ ProductCard.propTypes = {
   vat: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
   allergen: PropTypes.arrayOf(PropTypes.string),
+  caller: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(ProductCard);
