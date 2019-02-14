@@ -45,7 +45,7 @@ class ProductsList extends Component {
 
 ProductsList.propTypes = {
   classes: PropTypes.object.isRequired,
-  expanded: PropTypes.oneOf([PropTypes.string, false, null]),
+  products: PropTypes.array.isRequired,
 };
 
 export default withStyles(styles)(ProductsList);
