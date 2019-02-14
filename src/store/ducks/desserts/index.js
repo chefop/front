@@ -56,7 +56,7 @@ const dessertReducer = (state = initialState, action) => {
         ...state,
         desserts: action.payload,
       };
-    case UPDATE_DESSERT:
+    case UPDATE_DESSERT.success:
       return {
         ...state,
         desserts: [
