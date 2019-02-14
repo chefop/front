@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 export const getMainCourses = (state) => state.mainCourse.mainCourses;
 
 // Complex
-export const getAvalaible = createSelector(
+export const getAvalaibleMainCourse = createSelector(
   [getMainCourses],
   (mainCourses) => {
     return mainCourses.filter((mainCourse) => mainCourse.quantity > 0);
