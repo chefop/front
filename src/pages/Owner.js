@@ -15,7 +15,7 @@ import List from '@material-ui/core/List';
 import ProductTabs from '../components/ProductTabs';
 import { fetchStarters } from '../store/ducks/starters';
 import VIEWS from '../constants/constViews';
-import ModalForm from './owner/ModalForm';
+import DialogForm from './owner/DialogForm';
 
 const styles = (theme) => ({
   root: {
@@ -84,7 +84,7 @@ class Owner extends Component {
             {view === CARTE ? (
               <>
                 <ProductTabs caller={VIEWS.OWNER} />
-                <ModalForm />
+                <DialogForm />
               </>
             ) : view === MENUS ? (
               ''
