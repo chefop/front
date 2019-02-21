@@ -5,6 +5,7 @@ import mainCourseSaga from './mainCourses/operations';
 import allergenSaga from './allergens/operations';
 import starterSaga from './starters/operations';
 import dessertSaga from './desserts/operations';
+import volumeSaga from './volumes/operations';
 import drinkSaga from './drinks/operations';
 
 export default function* rootSaga() {
@@ -13,6 +14,7 @@ export default function* rootSaga() {
     [fork(allergenSaga)],
     [fork(starterSaga)],
     [fork(dessertSaga)],
+    [fork(volumeSaga)],
     [fork(drinkSaga)],
   );
 }
