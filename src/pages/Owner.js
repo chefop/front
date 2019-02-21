@@ -14,8 +14,13 @@ import Header from '../components/Header';
 import List from '@material-ui/core/List';
 import ProductTabs from '../components/ProductTabs';
 import { fetchStarters } from '../store/ducks/starters';
+import { fetchMainCourses } from '../store/ducks/mainCourses';
+import { fetchDesserts } from '../store/ducks/desserts';
+import { fetchDrinks } from '../store/ducks/drinks';
 import VIEWS from '../constants/constViews';
 import DialogForm from './owner/DialogForm';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 const styles = (theme) => ({
   root: {
@@ -40,7 +45,17 @@ class Owner extends Component {
   };
 
   componentDidMount() {
-    fetchStarters.request();
+    const {
+      fetchStarters,
+      fetchMainCourses,
+      fetchDesserts,
+      fetchDrinks,
+    } = this.props;
+
+    fetchStarters();
+    fetchMainCourses();
+    fetchDesserts();
+    fetchDrinks();
   }
 
   render() {
@@ -104,4 +119,19 @@ Owner.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Owner);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchStarters: fetchStarters.request,
+      fetchMainCourses: fetchMainCourses.request,
+      fetchDesserts: fetchDesserts.request,
+      fetchDrinks: fetchDrinks.request,
+    },
+    dispatch,
+  );
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(withStyles(styles)(Owner));

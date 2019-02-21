@@ -73,7 +73,7 @@ class ProductCard extends Component {
                 {allergen.map((element, index) => {
                   return (
                     <ListItem key={index}>
-                      <ListItemText primary={element} />
+                      <ListItemText primary={element.name} />
                     </ListItem>
                   );
                 })}

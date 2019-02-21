@@ -31,6 +31,10 @@ import {
 } from '../../utils/validationsHelper';
 import { red } from '@material-ui/core/colors';
 import Typography from '@material-ui/core/Typography';
+import VOLUMES from '../../constants/constVolumes';
+import Switch from '@material-ui/core/Switch';
+import { bindActionCreators } from 'redux';
+import { getAllergens } from '../../store/ducks/allergens/selectors';
 
 const styles = (theme) => ({
   paper: {
@@ -43,8 +47,8 @@ const styles = (theme) => ({
   },
   alert: {
     backgroundColor: red[50],
-    borderRadius: `${theme.spacing.unit}px`,
-    padding: theme.spacing.unit * 3,
+    borderRadius: theme.spacing.unit,
+    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
   },
   red: {
     color: red[500],
@@ -110,6 +114,10 @@ const initialState = {
   quantity: 0,
   allergen: [],
   photo: '',
+  volumeChoices: [],
+  alcohol: false,
+  cold_drink: false,
+  allergenChoices: [],
 };
 
 class DialogForm extends Component {
@@ -121,20 +129,27 @@ class DialogForm extends Component {
     });
   };
 
-  handleBaking = (event) => {
-    let value = event.target.value;
-    const { bakingChoices } = this.state;
-    const newBakingChoices = Array.from(bakingChoices);
+  handleBoolean = (name) => (event) => {
+    this.setState({
+      [name]: !this.state[name],
+    });
+  };
 
-    if (newBakingChoices.includes(value)) {
-      bakingChoices.splice(bakingChoices.indexOf(value), 1);
+  handleArray = (name) => (event) => {
+    let value = event.target.value;
+    const actualArray = this.state[name];
+
+    const newArray = Array.from(actualArray);
+
+    if (newArray.includes(value)) {
+      actualArray.splice(actualArray.indexOf(value), 1);
       this.setState({
-        bakingChoices: bakingChoices,
+        [name]: actualArray,
       });
     } else {
-      bakingChoices.push(value);
+      actualArray.push(value);
       this.setState({
-        bakingChoices: bakingChoices,
+        [name]: actualArray,
       });
     }
   };
@@ -160,8 +175,11 @@ class DialogForm extends Component {
       df_price,
       vat,
       quantity,
-      allergen,
       photo,
+      volumeChoices,
+      alcohol,
+      cold_drink,
+      allergenChoices,
     } = this.state;
 
     if (
@@ -177,7 +195,7 @@ class DialogForm extends Component {
             df_price,
             vat,
             quantity,
-            allergen,
+            allergen: allergenChoices,
             photo,
           });
         },
@@ -189,7 +207,7 @@ class DialogForm extends Component {
             vat,
             baking: bakingChoices,
             quantity,
-            allergen,
+            allergen: allergenChoices,
             photo,
           });
         },
@@ -200,24 +218,25 @@ class DialogForm extends Component {
             df_price,
             vat,
             quantity,
-            allergen,
+            allergen: allergenChoices,
             photo,
           });
         },
         [PRODUCTS.DRINK]: () => {
-          return addDessert({
+          return addDrink({
             name,
             description,
             df_price,
             vat,
             quantity,
-            allergen,
+            allergen: allergenChoices,
             photo,
+            alcohol,
+            volume: volumeChoices,
+            cold_drink,
           });
         },
       }[productChoice]());
-
-      // TODO : Ajouter les drinks
 
       this.setState(initialState);
       this.handleClose();
@@ -227,8 +246,17 @@ class DialogForm extends Component {
   };
 
   render() {
-    const { isOpen, bakingChoices, hasError, productChoice } = this.state;
-    const { classes } = this.props;
+    const {
+      isOpen,
+      bakingChoices,
+      hasError,
+      productChoice,
+      alcohol,
+      cold_drink,
+      volumeChoices,
+      allergenChoices,
+    } = this.state;
+    const { classes, allergens } = this.props;
 
     return (
       <>
@@ -255,7 +283,7 @@ class DialogForm extends Component {
                   component="h4"
                   className={classes.red}
                 >
-                  Veuillez remplir tous les champs.
+                  Veuillez remplir ou corriger tous les champs.
                 </Typography>
               </div>
             )}
@@ -271,7 +299,6 @@ class DialogForm extends Component {
                   aria-label="Produit"
                   name="produit"
                   className={classes.group}
-                  value={this.state.productChoice}
                   style={{ flexFlow: 'row' }}
                   onChange={this.handleChange('productChoice')}
                 >
@@ -373,7 +400,6 @@ class DialogForm extends Component {
                   <FormGroup
                     row
                     aria-label="Cuisson"
-                    name="cuisson"
                     className={classes.group}
                     style={{ flexFlow: 'row' }}
                   >
@@ -386,7 +412,7 @@ class DialogForm extends Component {
                           control={
                             <Checkbox
                               value={value}
-                              onChange={this.handleBaking}
+                              onChange={this.handleArray('bakingChoices')}
                               color="primary"
                               checked={bakingChoices.includes(value)}
                             />
@@ -398,6 +424,100 @@ class DialogForm extends Component {
                   </FormGroup>
                 </>
               )}
+              {productChoice === PRODUCTS.DRINK && (
+                <>
+                  <FormLabel component="legend" style={{ marginTop: 8 }}>
+                    Volume de la boisson
+                  </FormLabel>
+                  <FormGroup
+                    row
+                    aria-label="Boisson alcoolisée"
+                    className={classes.group}
+                    style={{ flexFlow: 'row' }}
+                  >
+                    {Object.keys(VOLUMES).map((key, index) => {
+                      const value = VOLUMES[key];
+
+                      return (
+                        <FormControlLabel
+                          key={index}
+                          control={
+                            <Checkbox
+                              value={value}
+                              onChange={this.handleArray('volumeChoices')}
+                              color="primary"
+                              checked={volumeChoices.includes(value)}
+                            />
+                          }
+                          label={value}
+                        />
+                      );
+                    })}
+                  </FormGroup>
+                  <FormGroup
+                    row
+                    aria-label="Boisson alcoolisée"
+                    className={classes.group}
+                    style={{ flexFlow: 'row' }}
+                  >
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          value="alcohol"
+                          onChange={this.handleBoolean('alcohol')}
+                          checked={alcohol}
+                        />
+                      }
+                      label="Boisson alcoolisée ?"
+                    />
+                  </FormGroup>
+                  <FormGroup
+                    row
+                    aria-label="Boisson froide ?"
+                    className={classes.group}
+                    style={{ flexFlow: 'row' }}
+                  >
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          value="cold_drink"
+                          onChange={this.handleBoolean('cold_drink')}
+                          checked={cold_drink}
+                        />
+                      }
+                      label="Boisson froide ?"
+                    />
+                  </FormGroup>
+                </>
+              )}
+              <FormLabel component="legend" style={{ marginTop: 8 }}>
+                Allergènes
+              </FormLabel>
+              <FormGroup
+                row
+                aria-label="Allergènes"
+                className={classes.group}
+                style={{ flexFlow: 'row' }}
+              >
+                {Object.keys(allergens).map((key, index) => {
+                  const value = allergens[key];
+
+                  return (
+                    <FormControlLabel
+                      key={index}
+                      control={
+                        <Checkbox
+                          value={value.name}
+                          onChange={this.handleArray('allergenChoices')}
+                          color="primary"
+                          checked={allergenChoices.includes(value.name)}
+                        />
+                      }
+                      label={value.name}
+                    />
+                  );
+                })}
+              </FormGroup>
             </form>
           </DialogContent>
           <DialogActions>
@@ -419,13 +539,24 @@ class DialogForm extends Component {
   }
 }
 
-const mapDispatchToProps = () => {
+// TODO : Get bakings
+
+const mapStateToProps = (state) => {
   return {
-    addStarter: addStarter.request,
-    addMainCourse: addMainCourse.request,
-    addDessert: addDessert.request,
-    addDrink: addDrink.request,
+    allergens: getAllergens(state),
   };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addStarter: addStarter.request,
+      addMainCourse: addMainCourse.request,
+      addDessert: addDessert.request,
+      addDrink: addDrink.request,
+    },
+    dispatch,
+  );
 };
 
 DialogForm.propTypes = {
@@ -433,6 +564,6 @@ DialogForm.propTypes = {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(withStyles(styles)(DialogForm));
