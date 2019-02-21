@@ -6,6 +6,7 @@ import mainCourseReducer from './mainCourses';
 import allergenReducer from './allergens';
 import dessertReducer from './desserts';
 import starterReducer from './starters';
+import volumeReducer from './volumes';
 import drinkReducer from './drinks';
 
 const reducers = (history) =>
@@ -15,6 +16,7 @@ const reducers = (history) =>
     allergen: allergenReducer,
     starter: starterReducer,
     dessert: dessertReducer,
+    volume: volumeReducer,
     drink: drinkReducer,
   });
 

@@ -11,7 +11,7 @@ const state = {
   },
 };
 
-it('sould return the desserts from state', () => {
+it('sould return the allergens from state', () => {
   expect(getAllergens(state)).toEqual([
     {
       _id: 'allergen1',
