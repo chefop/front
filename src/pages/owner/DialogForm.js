@@ -47,6 +47,7 @@ const styles = (theme) => ({
   },
   alert: {
     backgroundColor: red[50],
+    margin: `0 ${theme.spacing.unit * 3}px`,
     borderRadius: theme.spacing.unit,
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
   },
@@ -275,18 +276,18 @@ class DialogForm extends Component {
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Ajouter un produit</DialogTitle>
+          {hasError && (
+            <div className={classes.alert}>
+              <Typography
+                variant="subtitle1"
+                component="h4"
+                className={classes.red}
+              >
+                Veuillez remplir ou corriger les champs.
+              </Typography>
+            </div>
+          )}
           <DialogContent style={{ minWidth: 512 }}>
-            {hasError && (
-              <div className={classes.alert}>
-                <Typography
-                  variant="subtitle1"
-                  component="h4"
-                  className={classes.red}
-                >
-                  Veuillez remplir ou corriger tous les champs.
-                </Typography>
-              </div>
-            )}
             <form
               className={classes.formContainer}
               noValidate
