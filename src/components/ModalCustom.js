@@ -18,27 +18,27 @@ const styles = (theme) => ({
 
 class ModalCustom extends Component {
   state = {
-    open: false,
+    isOpen: false,
   };
 
   handleOpen = () => {
-    this.setState({ open: true });
+    this.setState({ isOpen: true });
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ isOpen: false });
   };
 
   render() {
     const { classes, title, content, buttonText } = this.props;
 
     return (
-      <div>
+      <>
         <Button onClick={this.handleOpen}>{buttonText}</Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.state.open}
+          open={this.state.isOpen}
           onClose={this.handleClose}
         >
           <div
@@ -53,7 +53,7 @@ class ModalCustom extends Component {
             </Typography>
           </div>
         </Modal>
-      </div>
+      </>
     );
   }
 }
@@ -65,6 +65,4 @@ ModalCustom.propTypes = {
   content: PropTypes.element.isRequired,
 };
 
-const ModalCustomWrapped = withStyles(styles)(ModalCustom);
-
-export default ModalCustomWrapped;
+export default withStyles(styles)(ModalCustom);

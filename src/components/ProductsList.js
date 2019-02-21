@@ -12,7 +12,7 @@ const styles = () => ({
 
 class ProductsList extends Component {
   render() {
-    const { products, classes } = this.props;
+    const { products, classes, caller } = this.props;
 
     return (
       <div style={{ marginTop: 24 }}>
@@ -32,6 +32,7 @@ class ProductsList extends Component {
                     vat={vat}
                     quantity={quantity}
                     allergen={allergen}
+                    caller={caller}
                   />
                 </Grid>
               );
@@ -46,6 +47,7 @@ class ProductsList extends Component {
 ProductsList.propTypes = {
   classes: PropTypes.object.isRequired,
   expanded: PropTypes.oneOf([PropTypes.string, false, null]),
+  caller: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(ProductsList);
