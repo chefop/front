@@ -19,6 +19,18 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
 import BAKINGS from '../../constants/constBakings';
+import { connect } from 'react-redux';
+import { addStarter } from '../../store/ducks/starters';
+import { addMainCourse } from '../../store/ducks/mainCourses';
+import { addDessert } from '../../store/ducks/desserts';
+import { addDrink } from '../../store/ducks/drinks';
+import {
+  isNotEmpty,
+  isSuperiorOrEqualToZero,
+  isSuperiorToZero,
+} from '../../utils/validationsHelper';
+import { red } from '@material-ui/core/colors';
+import Typography from '@material-ui/core/Typography';
 
 const styles = (theme) => ({
   paper: {
@@ -28,6 +40,14 @@ const styles = (theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
     outline: 'none',
+  },
+  alert: {
+    backgroundColor: red[50],
+    borderRadius: `${theme.spacing.unit}px`,
+    padding: theme.spacing.unit * 3,
+  },
+  red: {
+    color: red[500],
   },
   fab: {
     position: 'fixed',
@@ -78,19 +98,22 @@ const vatRate = [
   },
 ];
 
+const initialState = {
+  isOpen: false,
+  hasError: false,
+  productChoice: PRODUCTS.STARTER,
+  bakingChoices: [],
+  name: '',
+  description: '',
+  df_price: 0,
+  vat: vatRate[2].value,
+  quantity: 0,
+  allergen: [],
+  photo: '',
+};
+
 class DialogForm extends Component {
-  state = {
-    isOpen: false,
-    productChoice: 'starter',
-    bakingChoices: [],
-    name: '',
-    description: '',
-    df_price: 0,
-    vat: 0,
-    quantity: 0,
-    allergen: [],
-    photo: '',
-  };
+  state = initialState;
 
   handleChange = (name) => (event) => {
     this.setState({
@@ -124,8 +147,87 @@ class DialogForm extends Component {
     this.setState({ isOpen: false });
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const { addStarter, addMainCourse, addDessert, addDrink } = this.props;
+
+    const {
+      productChoice,
+      bakingChoices,
+      name,
+      description,
+      df_price,
+      vat,
+      quantity,
+      allergen,
+      photo,
+    } = this.state;
+
+    if (
+      isNotEmpty([name, description, photo]) &&
+      isSuperiorToZero([quantity]) &&
+      isSuperiorOrEqualToZero([vat, df_price])
+    ) {
+      ({
+        [PRODUCTS.STARTER]: () => {
+          return addStarter({
+            name,
+            description,
+            df_price,
+            vat,
+            quantity,
+            allergen,
+            photo,
+          });
+        },
+        [PRODUCTS.MAIN_COURSE]: () => {
+          return addMainCourse({
+            name,
+            description,
+            df_price,
+            vat,
+            baking: bakingChoices,
+            quantity,
+            allergen,
+            photo,
+          });
+        },
+        [PRODUCTS.DESSERT]: () => {
+          return addDessert({
+            name,
+            description,
+            df_price,
+            vat,
+            quantity,
+            allergen,
+            photo,
+          });
+        },
+        [PRODUCTS.DRINK]: () => {
+          return addDessert({
+            name,
+            description,
+            df_price,
+            vat,
+            quantity,
+            allergen,
+            photo,
+          });
+        },
+      }[productChoice]());
+
+      // TODO : Ajouter les drinks
+
+      this.setState(initialState);
+      this.handleClose();
+    } else {
+      this.setState({ hasError: true });
+    }
+  };
+
   render() {
-    const { isOpen, bakingChoices } = this.state;
+    const { isOpen, bakingChoices, hasError, productChoice } = this.state;
     const { classes } = this.props;
 
     return (
@@ -146,10 +248,22 @@ class DialogForm extends Component {
         >
           <DialogTitle id="form-dialog-title">Ajouter un produit</DialogTitle>
           <DialogContent style={{ minWidth: 512 }}>
+            {hasError && (
+              <div className={classes.alert}>
+                <Typography
+                  variant="subtitle1"
+                  component="h4"
+                  className={classes.red}
+                >
+                  Veuillez remplir tous les champs.
+                </Typography>
+              </div>
+            )}
             <form
               className={classes.formContainer}
               noValidate
               autoComplete="off"
+              onSubmit={this.handleSubmit}
             >
               <FormControl component="fieldset" className={classes.formControl}>
                 <FormLabel component="legend">Type du produit</FormLabel>
@@ -161,26 +275,18 @@ class DialogForm extends Component {
                   style={{ flexFlow: 'row' }}
                   onChange={this.handleChange('productChoice')}
                 >
-                  <FormControlLabel
-                    value={PRODUCTS.STARTER}
-                    control={<Radio color="primary" />}
-                    label="Entrée"
-                  />
-                  <FormControlLabel
-                    value={PRODUCTS.MAIN_COURSE}
-                    control={<Radio color="primary" />}
-                    label="Plat"
-                  />
-                  <FormControlLabel
-                    value={PRODUCTS.DESSERT}
-                    control={<Radio color="primary" />}
-                    label="Dessert"
-                  />
-                  <FormControlLabel
-                    value={PRODUCTS.DRINK}
-                    control={<Radio color="primary" />}
-                    label="Boisson"
-                  />
+                  {Object.keys(PRODUCTS).map((key, index) => {
+                    const value = PRODUCTS[key];
+
+                    return (
+                      <FormControlLabel
+                        key={index}
+                        value={value}
+                        control={<Radio color="primary" />}
+                        label={value}
+                      />
+                    );
+                  })}
                 </RadioGroup>
               </FormControl>
               <TextField
@@ -213,6 +319,7 @@ class DialogForm extends Component {
                 className={classes.textField}
                 margin="normal"
                 variant="outlined"
+                min={0}
               />
               <TextField
                 id="outlined-select-tva"
@@ -245,6 +352,7 @@ class DialogForm extends Component {
                 className={classes.textField}
                 margin="normal"
                 variant="outlined"
+                min={0}
               />
               <TextField
                 id="outlined-photo"
@@ -257,48 +365,39 @@ class DialogForm extends Component {
                 helperText="Lien de la photo"
                 variant="outlined"
               />
-              <FormLabel component="legend">Cuissons du produit</FormLabel>
-              <FormGroup
-                row
-                aria-label="Cuisson"
-                name="cuisson"
-                className={classes.group}
-                style={{ flexFlow: 'row' }}
-              >
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value={BAKINGS.RARE}
-                      onChange={this.handleBaking}
-                      color="primary"
-                      checked={bakingChoices.includes(BAKINGS.RARE)}
-                    />
-                  }
-                  label="Bleu"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value={BAKINGS.MEDIUM}
-                      onChange={this.handleBaking}
-                      color="primary"
-                      checked={bakingChoices.includes(BAKINGS.MEDIUM)}
-                    />
-                  }
-                  label="Saignant"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value={BAKINGS.WELL_DONE}
-                      onChange={this.handleBaking}
-                      color="primary"
-                      checked={bakingChoices.includes(BAKINGS.WELL_DONE)}
-                    />
-                  }
-                  label="À point"
-                />
-              </FormGroup>
+              {productChoice === PRODUCTS.MAIN_COURSE && (
+                <>
+                  <FormLabel component="legend" style={{ marginTop: 8 }}>
+                    Cuissons du produit
+                  </FormLabel>
+                  <FormGroup
+                    row
+                    aria-label="Cuisson"
+                    name="cuisson"
+                    className={classes.group}
+                    style={{ flexFlow: 'row' }}
+                  >
+                    {Object.keys(BAKINGS).map((key, index) => {
+                      const value = BAKINGS[key];
+
+                      return (
+                        <FormControlLabel
+                          key={index}
+                          control={
+                            <Checkbox
+                              value={value}
+                              onChange={this.handleBaking}
+                              color="primary"
+                              checked={bakingChoices.includes(value)}
+                            />
+                          }
+                          label={value}
+                        />
+                      );
+                    })}
+                  </FormGroup>
+                </>
+              )}
             </form>
           </DialogContent>
           <DialogActions>
@@ -306,9 +405,10 @@ class DialogForm extends Component {
               Annuler
             </Button>
             <Button
-              onClick={this.handleClose}
+              type="submit"
               variant="contained"
               color="primary"
+              onClick={this.handleSubmit}
             >
               Ajouter
             </Button>
@@ -319,8 +419,20 @@ class DialogForm extends Component {
   }
 }
 
+const mapDispatchToProps = () => {
+  return {
+    addStarter: addStarter.request,
+    addMainCourse: addMainCourse.request,
+    addDessert: addDessert.request,
+    addDrink: addDrink.request,
+  };
+};
+
 DialogForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DialogForm);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(withStyles(styles)(DialogForm));

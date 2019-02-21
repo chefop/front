@@ -1,8 +1,8 @@
 const PRODUCTS = {
-  STARTER: 'STARTER',
-  MAIN_COURSE: 'MAIN_COURSE',
-  DESSERT: 'DESSERT',
-  DRINK: 'DRINK',
+  STARTER: 'Entrée',
+  MAIN_COURSE: 'Plat',
+  DESSERT: 'Dessert',
+  DRINK: 'Boisson',
 };
 
 export default PRODUCTS;

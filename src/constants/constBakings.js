@@ -1,7 +1,7 @@
 const BAKINGS = {
-  RARE: 'RARE',
-  MEDIUM: 'MEDIUM',
-  WELL_DONE: 'WELL_DONE',
+  RARE: 'Bleu',
+  MEDIUM: 'Saignant',
+  WELL_DONE: 'À point',
 };
 
 export default BAKINGS;
