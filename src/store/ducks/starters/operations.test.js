@@ -30,136 +30,151 @@ import * as starterAPI from '../../APICalls/starterAPI';
 import starterSagas from './operations';
 
 // WORKERS
+describe('addStarterWorker', () => {
+  it('add a starter', () => {
+    const action = {
+      payload: {
+        name: 'Ma nouvelle entrée',
+      },
+    };
 
-it('add a starter', () => {
-  const action = {
-    payload: {
-      name: 'Ma nouvelle entrée',
-    },
-  };
+    const fakeRes = {
+      status: 200,
+      data: {
+        starter: { name: 'Ma nouvelle entrée' },
+      },
+    };
 
-  const fakeRes = {
-    status: 200,
-    data: {
-      starter: { name: 'Ma nouvelle entrée' },
-    },
-  };
+    return expectSaga(addStarterWorker, action)
+      .provide([[matchers.call.fn(starterAPI.createStarter), fakeRes]])
+      .put(addStarter.success({ name: 'Ma nouvelle entrée' }))
 
-  return expectSaga(addStarterWorker, action)
-    .provide([[matchers.call.fn(starterAPI.createStarter), fakeRes]])
-    .put(addStarter.success({ name: 'Ma nouvelle entrée' }))
+      .run();
+  });
 
-    .run();
+  it('and handles errors', () => {
+    const action = {
+      payload: {
+        name: 'Ma nouvelle entrée',
+      },
+    };
+    const error = new Error('error');
+
+    return expectSaga(addStarterWorker, action)
+      .provide([
+        [matchers.call.fn(starterAPI.createStarter), throwError(error)],
+      ])
+      .put(addStarter.failure('error'))
+
+      .run();
+  });
 });
 
-it('and handles errors', () => {
-  const action = {
-    payload: {
-      name: 'Ma nouvelle entrée',
-    },
-  };
-  const error = new Error('error');
+describe('fetchStartersWorker', () => {
+  it('fetch starters', () => {
+    const fakeRes = {
+      status: 200,
+      data: {
+        starters: { name: 'mes entrées' },
+      },
+    };
 
-  return expectSaga(addStarterWorker, action)
-    .provide([[matchers.call.fn(starterAPI.createStarter), throwError(error)]])
-    .put(addStarter.failure('error'))
+    return expectSaga(fetchStartersWorker)
+      .provide([[matchers.call.fn(starterAPI.fetchStarters), fakeRes]])
+      .put(fetchStarters.success({ name: 'mes entrées' }))
 
-    .run();
+      .run();
+  });
+
+  it('and handles errors', () => {
+    const error = new Error('error');
+
+    return expectSaga(fetchStartersWorker)
+      .provide([
+        [matchers.call.fn(starterAPI.fetchStarters), throwError(error)],
+      ])
+      .put(fetchStarters.failure('error'))
+
+      .run();
+  });
 });
 
-it('fetch starters', () => {
-  const fakeRes = {
-    status: 200,
-    data: {
-      starters: { name: 'mes entrées' },
-    },
-  };
+describe('updateStarterWorker', () => {
+  it('update starter', () => {
+    const action = {
+      payload: {
+        _id: '12987',
+        name: 'New name',
+      },
+    };
 
-  return expectSaga(fetchStartersWorker)
-    .provide([[matchers.call.fn(starterAPI.fetchStarters), fakeRes]])
-    .put(fetchStarters.success({ name: 'mes entrées' }))
+    const fakeRes = {
+      status: 200,
+      data: {
+        starter: action.payload,
+      },
+    };
 
-    .run();
+    return expectSaga(updateStarterWorker, action)
+      .provide([[matchers.call.fn(starterAPI.updateStarter), fakeRes]])
+      .put(updateStarter.success({ _id: '12987', name: 'New name' }))
+
+      .run();
+  });
+
+  it('and handles errors', () => {
+    const action = {
+      payload: {
+        _id: '12987',
+        name: 'New name',
+      },
+    };
+    const error = new Error('error');
+
+    return expectSaga(updateStarterWorker, action)
+      .provide([
+        [matchers.call.fn(starterAPI.updateStarter), throwError(error)],
+      ])
+      .put(updateStarter.failure('error'))
+
+      .run();
+  });
 });
 
-it('and handles errors', () => {
-  const error = new Error('error');
+describe('deleteStarterWorker', () => {
+  it('delete starter', () => {
+    const action = {
+      payload: 'starterId',
+    };
 
-  return expectSaga(fetchStartersWorker)
-    .provide([[matchers.call.fn(starterAPI.fetchStarters), throwError(error)]])
-    .put(fetchStarters.failure('error'))
+    const fakeRes = {
+      status: 200,
+      data: {
+        starter: { name: 'starter supprimé', _id: action.payload },
+      },
+    };
 
-    .run();
-});
+    return expectSaga(deleteStarterWorker, action)
+      .provide([[matchers.call.fn(starterAPI.deleteStarter), fakeRes]])
+      .put(deleteStarter.success('starterId'))
 
-it('update starter', () => {
-  const action = {
-    payload: {
-      _id: '12987',
-      name: 'New name',
-    },
-  };
+      .run();
+  });
 
-  const fakeRes = {
-    status: 200,
-    data: {
-      starter: action.payload,
-    },
-  };
+  it('and handles errors', () => {
+    const action = {
+      payload: 'starterId',
+    };
+    const error = new Error('error');
 
-  return expectSaga(updateStarterWorker, action)
-    .provide([[matchers.call.fn(starterAPI.updateStarter), fakeRes]])
-    .put(updateStarter.success({ _id: '12987', name: 'New name' }))
+    return expectSaga(deleteStarterWorker, action)
+      .provide([
+        [matchers.call.fn(starterAPI.deleteStarter), throwError(error)],
+      ])
+      .put(deleteStarter.failure('error'))
 
-    .run();
-});
-
-it('and handles errors', () => {
-  const action = {
-    payload: {
-      _id: '12987',
-      name: 'New name',
-    },
-  };
-  const error = new Error('error');
-
-  return expectSaga(updateStarterWorker, action)
-    .provide([[matchers.call.fn(starterAPI.updateStarter), throwError(error)]])
-    .put(updateStarter.failure('error'))
-
-    .run();
-});
-
-it('delete starter', () => {
-  const action = {
-    payload: 'starterId',
-  };
-
-  const fakeRes = {
-    status: 200,
-    data: {
-      starter: { name: 'starter supprimé', _id: action.payload },
-    },
-  };
-
-  return expectSaga(deleteStarterWorker, action)
-    .provide([[matchers.call.fn(starterAPI.deleteStarter), fakeRes]])
-    .put(deleteStarter.success('starterId'))
-
-    .run();
-});
-
-it('and handles errors', () => {
-  const action = {
-    payload: 'starterId',
-  };
-  const error = new Error('error');
-
-  return expectSaga(deleteStarterWorker, action)
-    .provide([[matchers.call.fn(starterAPI.deleteStarter), throwError(error)]])
-    .put(deleteStarter.failure('error'))
-
-    .run();
+      .run();
+  });
 });
 
 // Watchers

@@ -20,7 +20,7 @@ const state = {
   },
 };
 
-it('sould return the starters from state', () => {
+it('should return the starters from state', () => {
   expect(getStarters(state)).toEqual([
     {
       quantity: 12,
@@ -33,7 +33,7 @@ it('sould return the starters from state', () => {
   ]);
 });
 
-it('sould return the available starters', () => {
+it('should return the available starters', () => {
   expect(getAvalaibleStarters(state)).toEqual([
     {
       quantity: 12,
@@ -42,7 +42,7 @@ it('sould return the available starters', () => {
   ]);
 });
 
-it('sould return the out of stock starters', () => {
+it('should return the out of stock starters', () => {
   expect(getOutOfStockStarters(state)).toEqual([
     {
       quantity: 0,

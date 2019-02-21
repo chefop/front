@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "10.13.0"
+before_install:
+  - echo "Travis launch"
+install:
+  - npm i
+script:
+  - npm test
+notification:
+  email: false

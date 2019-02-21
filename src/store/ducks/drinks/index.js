@@ -64,11 +64,11 @@ const drinkReducer = (state = initialState, action) => {
         ...state,
         drinks: action.payload,
       };
-    case UPDATE_DRINK:
+    case UPDATE_DRINK.success:
       return {
         ...state,
         drinks: [
-          ...state.drinks.filter((drink) => drink._id !== action.payload),
+          ...state.drinks.filter((drink) => drink._id !== action.payload._id),
           action.payload,
         ],
       };
