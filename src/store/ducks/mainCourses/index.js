@@ -24,7 +24,7 @@ const initialState = {
       dfPrice: 14,
       vat: 0.2,
       quantity: 25,
-      allergen: ['allergen2'],
+      allergen: [{ _id: '123232312223', name: 'gras' }],
       photo:
         'https://media.blueapron.com/recipes/2121/square_newsletter_images/1490637106-4-0003-6001/403_2PRE07-steak-frites-18311_WEB_SQ_hi_res.jpg',
       _id: '87982898094923',
@@ -35,7 +35,7 @@ const initialState = {
       dfPrice: 17,
       vat: 0.2,
       quantity: 0,
-      allergen: [],
+      allergen: [{ _id: '123312223', name: 'lactose' }],
       photo:
         'https://image.afcdn.com/recipe/20160401/38946_w1024h768c1cx2690cy1793.jpg',
       _id: '90809832769787298427467072',
@@ -46,7 +46,7 @@ const initialState = {
       dfPrice: 15.5,
       vat: 0.2,
       quantity: 2,
-      allergen: ['allergen3'],
+      allergen: [{ _id: '1233122', name: 'bourgignon' }],
       photo:
         'https://static.cuisineaz.com/610x610/i94631-boeuf-bourguignon.jpg',
       _id: '90840932834234',

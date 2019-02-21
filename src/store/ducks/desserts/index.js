@@ -25,7 +25,10 @@ const initialState = {
       dfPrice: 2.8,
       vat: 0.2,
       quantity: 46,
-      allergen: ['allergen1', 'allergen3'],
+      allergen: [
+        { _id: '123123', name: 'Soja' },
+        { _id: '1233232123', name: 'Lait' },
+      ],
       photo:
         'https://www.recettes.net/documents/upload/original/c/r/crepe-au-sucre.jpg',
     },
@@ -36,7 +39,10 @@ const initialState = {
       dfPrice: 2.5,
       vat: 0.2,
       quantity: 24,
-      allergen: ['allergen1'],
+      allergen: [
+        { _id: '12312223', name: 'gluten' },
+        { _id: '122323', name: 'Lait' },
+      ],
       photo:
         'https://static.cuisineaz.com/400x320/i140676-brownie-cookie-chocolat-noix-de-pecan.jpeg',
     },
