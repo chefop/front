@@ -24,7 +24,7 @@ const initialState = {
       dfPrice: 14,
       vat: 0.2,
       quantity: 25,
-      allergen: ['9084090324', '8798320480234'],
+      allergen: ['allergen2'],
       photo:
         'https://media.blueapron.com/recipes/2121/square_newsletter_images/1490637106-4-0003-6001/403_2PRE07-steak-frites-18311_WEB_SQ_hi_res.jpg',
       _id: '87982898094923',
@@ -46,7 +46,7 @@ const initialState = {
       dfPrice: 15.5,
       vat: 0.2,
       quantity: 2,
-      allergen: ['89173987408293'],
+      allergen: ['allergen3'],
       photo:
         'https://static.cuisineaz.com/610x610/i94631-boeuf-bourguignon.jpg',
       _id: '90840932834234',

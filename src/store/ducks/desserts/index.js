@@ -25,7 +25,7 @@ const initialState = {
       dfPrice: 2.8,
       vat: 0.2,
       quantity: 46,
-      allergen: ['9080129809', '0980980980'],
+      allergen: ['allergen1', 'allergen3'],
       photo:
         'https://www.recettes.net/documents/upload/original/c/r/crepe-au-sucre.jpg',
     },
@@ -36,7 +36,7 @@ const initialState = {
       dfPrice: 2.5,
       vat: 0.2,
       quantity: 24,
-      allergen: ['098091809', '1313139939'],
+      allergen: ['allergen1'],
       photo:
         'https://static.cuisineaz.com/400x320/i140676-brownie-cookie-chocolat-noix-de-pecan.jpeg',
     },
