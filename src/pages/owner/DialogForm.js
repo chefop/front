@@ -299,6 +299,7 @@ class DialogForm extends Component {
                 <RadioGroup
                   aria-label="Produit"
                   name="produit"
+                  value={productChoice}
                   className={classes.group}
                   style={{ flexFlow: 'row' }}
                   onChange={this.handleChange('productChoice')}

@@ -65,21 +65,25 @@ class ProductCard extends Component {
           )}
         </CardContent>
         <div style={{ marginLeft: '8px' }}>
-          <ModalCustom
-            title="Liste des allergènes"
-            buttonText="Voir les allergènes"
-            content={
-              <List dense={dense}>
-                {allergen.map((element, index) => {
-                  return (
-                    <ListItem key={index}>
-                      <ListItemText primary={element.name} />
-                    </ListItem>
-                  );
-                })}
-              </List>
-            }
-          />
+          {allergen.length === 0 ? (
+            <Button disabled>Aucun allergène</Button>
+          ) : (
+            <ModalCustom
+              title="Liste des allergènes"
+              buttonText="Voir les allergènes"
+              content={
+                <List dense={dense}>
+                  {allergen.map((element, index) => {
+                    return (
+                      <ListItem key={index}>
+                        <ListItemText primary={element.name} />
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              }
+            />
+          )}
         </div>
         <CardActions>
           <Typography variant="h5" gutterBottom style={{ padding: '8px' }}>
