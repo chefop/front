@@ -6,10 +6,10 @@ import { ADD_DESSERT, FETCH_DESSERTS, UPDATE_DESSERT, DELETE_DESSERT } from '.';
 // Import action creators
 import { addDessert, fetchDesserts, updateDessert, deleteDessert } from '.';
 
-import * as dessertAPI from '../../APICalls/dessertsAPI';
+import * as dessertAPI from '../../APICalls/dessertAPI';
 
 // WORKERS
-function* addDessertWorker(action) {
+export function* addDessertWorker(action) {
   try {
     const dessert = action.payload;
     const res = yield call(dessertAPI.createDessert, dessert);
@@ -22,19 +22,19 @@ function* addDessertWorker(action) {
   }
 }
 
-function* fetchDessertsWorker() {
+export function* fetchDessertsWorker() {
   try {
     const res = yield call(dessertAPI.fetchDesserts);
     if (res.status === 200) {
-      const dessert = res.data.dessert;
-      yield put(fetchDesserts.success(dessert));
+      const desserts = res.data.desserts;
+      yield put(fetchDesserts.success(desserts));
     }
   } catch (err) {
     yield put(fetchDesserts.failure(err.message));
   }
 }
 
-function* updateDessertWorker(action) {
+export function* updateDessertWorker(action) {
   try {
     const dessert = action.payload;
     const res = yield call(dessertAPI.updateDessert, dessert);
@@ -47,7 +47,7 @@ function* updateDessertWorker(action) {
   }
 }
 
-function* deleteDessertWorker(action) {
+export function* deleteDessertWorker(action) {
   try {
     const dessert = action.payload;
     const res = yield call(dessertAPI.deleteDessert, dessert);
@@ -61,19 +61,19 @@ function* deleteDessertWorker(action) {
 }
 
 // WATCHERS
-function* addDessertSaga() {
+export function* addDessertSaga() {
   yield takeLatest(ADD_DESSERT.request, addDessertWorker);
 }
 
-function* fetchDessertsSaga() {
+export function* fetchDessertsSaga() {
   yield takeLatest(FETCH_DESSERTS.request, fetchDessertsWorker);
 }
 
-function* updateDessertSaga() {
+export function* updateDessertSaga() {
   yield takeLatest(UPDATE_DESSERT.request, updateDessertWorker);
 }
 
-function* deleteDessertSaga() {
+export function* deleteDessertSaga() {
   yield takeLatest(DELETE_DESSERT.request, deleteDessertWorker);
 }
 
