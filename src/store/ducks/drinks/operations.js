@@ -9,7 +9,7 @@ import { addDrink, deleteDrink, updateDrink, fetchDrinks } from '.';
 import * as drinkAPI from '../../APICalls/drinksAPI';
 
 // WORKERS
-function* addDrinkWorker(action) {
+export function* addDrinkWorker(action) {
   try {
     const drink = action.payload;
     const res = yield call(drinkAPI.createDrink, drink);
@@ -22,7 +22,7 @@ function* addDrinkWorker(action) {
   }
 }
 
-function* updateDrinkWorker(action) {
+export function* updateDrinkWorker(action) {
   try {
     const drink = action.payload;
     const res = yield call(drinkAPI.updateDrink, drink);
@@ -35,7 +35,7 @@ function* updateDrinkWorker(action) {
   }
 }
 
-function* fetchDrinksWorker() {
+export function* fetchDrinksWorker() {
   try {
     const res = yield call(drinkAPI.fetchDrinks);
     if (res.status === 200) {
@@ -47,7 +47,7 @@ function* fetchDrinksWorker() {
   }
 }
 
-function* deleteDrinkWorker(action) {
+export function* deleteDrinkWorker(action) {
   try {
     const drinkId = action.payload;
     const res = yield call(drinkAPI.deleteDrink, drinkId);
@@ -61,19 +61,19 @@ function* deleteDrinkWorker(action) {
 }
 
 // WATCHERS
-function* addDrinkSaga() {
+export function* addDrinkSaga() {
   yield takeLatest(ADD_DRINK.request, addDrinkWorker);
 }
 
-function* updateDrinkSaga() {
+export function* updateDrinkSaga() {
   yield takeLatest(UPDATE_DRINK.request, updateDrinkWorker);
 }
 
-function* fetchDrinksSaga() {
+export function* fetchDrinksSaga() {
   yield takeLatest(FETCH_DRINKS.request, fetchDrinksWorker);
 }
 
-function* deleteDrinkSaga() {
+export function* deleteDrinkSaga() {
   yield takeLatest(DELETE_DRINK.request, deleteDrinkWorker);
 }
 
