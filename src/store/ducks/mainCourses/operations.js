@@ -19,7 +19,7 @@ import {
 import * as mainCourseAPI from '../../APICalls/mainCourseAPI';
 
 // WORKERS
-function* addMainCourseWorker(action) {
+export function* addMainCourseWorker(action) {
   try {
     const mainCourse = action.payload;
     const res = yield call(mainCourseAPI.createMainCourse, mainCourse);
@@ -32,7 +32,7 @@ function* addMainCourseWorker(action) {
   }
 }
 
-function* fetchMainCoursesWorker() {
+export function* fetchMainCoursesWorker() {
   try {
     const res = yield call(mainCourseAPI.fetchMainCourses);
     if (res.status === 200) {
@@ -44,7 +44,7 @@ function* fetchMainCoursesWorker() {
   }
 }
 
-function* updateMainCourseWorker(action) {
+export function* updateMainCourseWorker(action) {
   try {
     const mainCourse = action.payload;
     const res = yield call(mainCourseAPI.updateMainCourse, mainCourse);
@@ -57,7 +57,7 @@ function* updateMainCourseWorker(action) {
   }
 }
 
-function* deleteMainCourseWorker(action) {
+export function* deleteMainCourseWorker(action) {
   try {
     const mainCourseId = action.payload;
     const res = yield call(mainCourseAPI.deleteMainCourse, mainCourseId);
@@ -71,19 +71,19 @@ function* deleteMainCourseWorker(action) {
 }
 
 // WATCHERS
-function* addMainCourseSaga() {
+export function* addMainCourseSaga() {
   yield takeLatest(ADD_MAIN_COURSE.request, addMainCourseWorker);
 }
 
-function* fetchMainCoursesSaga() {
+export function* fetchMainCoursesSaga() {
   yield takeLatest(FETCH_MAIN_COURSES.request, fetchMainCoursesWorker);
 }
 
-function* updateMainCourseSaga() {
+export function* updateMainCourseSaga() {
   yield takeLatest(UPDATE_MAIN_COURSE.request, updateMainCourseWorker);
 }
 
-function* deleteMainCourseSaga() {
+export function* deleteMainCourseSaga() {
   yield takeLatest(DELETE_MAIN_COURSE.request, deleteMainCourseWorker);
 }
 
