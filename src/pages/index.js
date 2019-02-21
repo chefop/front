@@ -4,11 +4,13 @@ import Room from './Room';
 import Kitchen from './Kitchen';
 import Customer from './Customer';
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
 } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from '../store';
 import ROUTES from '../constants/constRoutes';
 import Board from './Board';
 import Home from './Home';
@@ -19,7 +21,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <Router>
+        <ConnectedRouter history={history}>
           <Switch>
             <Route
               exact
@@ -38,7 +40,7 @@ class App extends Component {
             <Route exact strict path={ROUTES.ROOM} component={Room} />
             <Redirect to={ROUTES.HOME} />
           </Switch>
-        </Router>
+        </ConnectedRouter>
 
         <EasterEgg />
       </>
