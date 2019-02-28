@@ -394,66 +394,66 @@ class DialogForm extends Component {
               />
               {productChoice === PRODUCTS.MAIN_COURSE && (
                 <>
-                  <FormLabel component="legend" style={{ marginTop: 8 }}>
-                    Cuissons du produit
-                  </FormLabel>
-                  <FormGroup
-                    row
-                    aria-label="Cuisson"
-                    className={classes.group}
-                    style={{ flexFlow: 'row' }}
-                  >
-                    {Object.keys(BAKINGS).map((key, index) => {
-                      const value = BAKINGS[key];
+                  {/*<FormLabel component="legend" style={{ marginTop: 8 }}>*/}
+                  {/*Cuissons du produit*/}
+                  {/*</FormLabel>*/}
+                  {/*<FormGroup*/}
+                  {/*row*/}
+                  {/*aria-label="Cuisson"*/}
+                  {/*className={classes.group}*/}
+                  {/*style={{ flexFlow: 'row' }}*/}
+                  {/*>*/}
+                  {/*{Object.keys(BAKINGS).map((key, index) => {*/}
+                  {/*const value = BAKINGS[key];*/}
 
-                      return (
-                        <FormControlLabel
-                          key={index}
-                          control={
-                            <Checkbox
-                              value={value}
-                              onChange={this.handleArray('bakingChoices')}
-                              color="primary"
-                              checked={bakingChoices.includes(value)}
-                            />
-                          }
-                          label={value}
-                        />
-                      );
-                    })}
-                  </FormGroup>
+                  {/*return (*/}
+                  {/*<FormControlLabel*/}
+                  {/*key={index}*/}
+                  {/*control={*/}
+                  {/*<Checkbox*/}
+                  {/*value={value}*/}
+                  {/*onChange={this.handleArray('bakingChoices')}*/}
+                  {/*color="primary"*/}
+                  {/*checked={bakingChoices.includes(value)}*/}
+                  {/*/>*/}
+                  {/*}*/}
+                  {/*label={value}*/}
+                  {/*/>*/}
+                  {/*);*/}
+                  {/*})}*/}
+                  {/*</FormGroup>*/}
                 </>
               )}
               {productChoice === PRODUCTS.DRINK && (
                 <>
-                  <FormLabel component="legend" style={{ marginTop: 8 }}>
-                    Volume de la boisson
-                  </FormLabel>
-                  <FormGroup
-                    row
-                    aria-label="Boisson alcoolisée"
-                    className={classes.group}
-                    style={{ flexFlow: 'row' }}
-                  >
-                    {Object.keys(VOLUMES).map((key, index) => {
-                      const value = VOLUMES[key];
+                  {/*<FormLabel component="legend" style={{ marginTop: 8 }}>*/}
+                  {/*Volume de la boisson*/}
+                  {/*</FormLabel>*/}
+                  {/*<FormGroup*/}
+                  {/*row*/}
+                  {/*aria-label="Boisson alcoolisée"*/}
+                  {/*className={classes.group}*/}
+                  {/*style={{ flexFlow: 'row' }}*/}
+                  {/*>*/}
+                  {/*{Object.keys(VOLUMES).map((key, index) => {*/}
+                  {/*const value = VOLUMES[key];*/}
 
-                      return (
-                        <FormControlLabel
-                          key={index}
-                          control={
-                            <Checkbox
-                              value={value}
-                              onChange={this.handleArray('volumeChoices')}
-                              color="primary"
-                              checked={volumeChoices.includes(value)}
-                            />
-                          }
-                          label={value}
-                        />
-                      );
-                    })}
-                  </FormGroup>
+                  {/*return (*/}
+                  {/*<FormControlLabel*/}
+                  {/*key={index}*/}
+                  {/*control={*/}
+                  {/*<Checkbox*/}
+                  {/*value={value}*/}
+                  {/*onChange={this.handleArray('volumeChoices')}*/}
+                  {/*color="primary"*/}
+                  {/*checked={volumeChoices.includes(value)}*/}
+                  {/*/>*/}
+                  {/*}*/}
+                  {/*label={value}*/}
+                  {/*/>*/}
+                  {/*);*/}
+                  {/*})}*/}
+                  {/*</FormGroup>*/}
                   <FormGroup
                     row
                     aria-label="Boisson alcoolisée"
@@ -490,34 +490,34 @@ class DialogForm extends Component {
                   </FormGroup>
                 </>
               )}
-              <FormLabel component="legend" style={{ marginTop: 8 }}>
-                Allergènes
-              </FormLabel>
-              <FormGroup
-                row
-                aria-label="Allergènes"
-                className={classes.group}
-                style={{ flexFlow: 'row' }}
-              >
-                {Object.keys(allergens).map((key, index) => {
-                  const value = allergens[key];
+              {/*<FormLabel component="legend" style={{ marginTop: 8 }}>*/}
+              {/*Allergènes*/}
+              {/*</FormLabel>*/}
+              {/*<FormGroup*/}
+              {/*row*/}
+              {/*aria-label="Allergènes"*/}
+              {/*className={classes.group}*/}
+              {/*style={{ flexFlow: 'row' }}*/}
+              {/*>*/}
+              {/*{Object.keys(allergens).map((key, index) => {*/}
+              {/*const value = allergens[key];*/}
 
-                  return (
-                    <FormControlLabel
-                      key={index}
-                      control={
-                        <Checkbox
-                          value={value.name}
-                          onChange={this.handleArray('allergenChoices')}
-                          color="primary"
-                          checked={allergenChoices.includes(value.name)}
-                        />
-                      }
-                      label={value.name}
-                    />
-                  );
-                })}
-              </FormGroup>
+              {/*return (*/}
+              {/*<FormControlLabel*/}
+              {/*key={index}*/}
+              {/*control={*/}
+              {/*<Checkbox*/}
+              {/*value={value.name}*/}
+              {/*onChange={this.handleArray('allergenChoices')}*/}
+              {/*color="primary"*/}
+              {/*checked={allergenChoices.includes(value.name)}*/}
+              {/*/>*/}
+              {/*}*/}
+              {/*label={value.name}*/}
+              {/*/>*/}
+              {/*);*/}
+              {/*})}*/}
+              {/*</FormGroup>*/}
             </form>
           </DialogContent>
           <DialogActions>

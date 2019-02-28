@@ -17,10 +17,11 @@ import { fetchStarters } from '../store/ducks/starters';
 import { fetchMainCourses } from '../store/ducks/mainCourses';
 import { fetchDesserts } from '../store/ducks/desserts';
 import { fetchDrinks } from '../store/ducks/drinks';
-import VIEWS from '../constants/constViews';
 import DialogForm from './owner/DialogForm';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import VIEWS from '../constants/constViews';
+import SUB_VIEWS from '../constants/constSubViews';
 
 const styles = (theme) => ({
   root: {
@@ -33,11 +34,11 @@ const styles = (theme) => ({
   toolbar: theme.mixins.toolbar,
 });
 
-const { MENUS, CARTE, COMMANDES, TABLES } = VIEWS;
+const { MENUS, CARTE, COMMANDES, TABLES } = SUB_VIEWS;
 
 class Owner extends Component {
   state = {
-    view: MENUS,
+    view: CARTE,
   };
 
   changeView = (newView) => {
@@ -68,22 +69,22 @@ class Owner extends Component {
           <Header title={'Gérant'}>
             <List>
               {[
-                { text: 'Commandes', view: COMMANDES },
-                { text: 'Tables', view: TABLES },
-                { text: 'Menus', view: MENUS },
+                // { text: 'Commandes', view: COMMANDES },
+                // { text: 'Tables', view: TABLES },
+                // { text: 'Menus', view: MENUS },
                 { text: 'Carte', view: CARTE },
-              ].map(({ text, view }, index) => (
+              ].map(({ text, view }) => (
                 <ListItem
                   button
                   key={text}
                   onClick={() => this.changeView(view)}
                 >
                   <ListItemIcon>
-                    {index === 0 ? (
+                    {view === COMMANDES ? (
                       <TrendingUp />
-                    ) : index === 1 ? (
+                    ) : view === TABLES ? (
                       <AirlineSeatReclineNormal />
-                    ) : index === 2 ? (
+                    ) : view === MENUS ? (
                       <DeveloperBoard />
                     ) : (
                       <Fastfood />

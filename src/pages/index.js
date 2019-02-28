@@ -3,12 +3,7 @@ import Owner from './Owner';
 import Room from './Room';
 import Kitchen from './Kitchen';
 import Customer from './Customer';
-import {
-  // BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../store';
 import ROUTES from '../constants/constRoutes';

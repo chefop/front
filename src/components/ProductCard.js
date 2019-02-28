@@ -12,6 +12,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ModalCustom from './ModalCustom';
 import VIEWS from '../constants/constViews';
+import { priceEuros, priceWithVat } from '../utils/priceHelper';
 
 const styles = () => ({
   card: {
@@ -23,10 +24,6 @@ const styles = () => ({
 });
 
 class ProductCard extends Component {
-  state = {
-    dense: false,
-  };
-
   render() {
     const {
       classes,
@@ -38,11 +35,12 @@ class ProductCard extends Component {
       quantity,
       allergen,
       caller,
+      _id,
+      handleAddProduct,
     } = this.props;
 
-    const price = (df_price * (1 + vat / 100)).toFixed(2);
+    const price = priceWithVat(df_price, vat);
 
-    const { dense } = this.state;
     return (
       <Card className={classes.card}>
         <CardMedia className={classes.media} image={photo} title={name} />
@@ -71,7 +69,7 @@ class ProductCard extends Component {
               title="Liste des allergènes"
               buttonText="Voir les allergènes"
               content={
-                <List dense={dense}>
+                <List dense={true}>
                   {allergen.map((element, index) => {
                     return (
                       <ListItem key={index}>
@@ -86,25 +84,25 @@ class ProductCard extends Component {
         </div>
         <CardActions>
           <Typography variant="h5" gutterBottom style={{ padding: '8px' }}>
-            {new Intl.NumberFormat('fr-FR', {
-              style: 'currency',
-              currency: 'EUR',
-            }).format(price)}
+            {priceEuros(price)}
           </Typography>
-          {caller === VIEWS.CUSTOMER ? (
+          {caller === VIEWS.CUSTOMER && (
             <Button
               size="small"
               color="primary"
               style={{ marginLeft: 'auto' }}
               {...quantity === 0 && { disabled: true }}
+              onClick={() => handleAddProduct({ name, _id, price })}
             >
               Ajouter
             </Button>
-          ) : (
-            <Button size="small" color="primary" style={{ marginLeft: 'auto' }}>
-              Modifier
-            </Button>
-          )}
+          )
+          //   : (
+          //   <Button size="small" color="primary" style={{ marginLeft: 'auto' }}>
+          //     Modifier
+          //   </Button>
+          // )
+          }
         </CardActions>
       </Card>
     );
@@ -121,6 +119,8 @@ ProductCard.propTypes = {
   quantity: PropTypes.number.isRequired,
   allergen: PropTypes.arrayOf(PropTypes.object),
   caller: PropTypes.string.isRequired,
+  _id: PropTypes.string.isRequired,
+  handleAddProduct: PropTypes.func,
 };
 
 export default withStyles(styles)(ProductCard);

@@ -5,12 +5,19 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { DeveloperBoard, Fastfood, Assignment } from '@material-ui/icons';
+import {
+  DeveloperBoard,
+  Fastfood,
+  Assignment,
+  TrendingUp,
+  AirlineSeatReclineNormal,
+} from '@material-ui/icons';
 import Header from '../components/Header';
 import { fetchStarters } from '../store/ducks/starters';
 import SUB_VIEWS from '../constants/constSubViews';
 import VIEWS from '../constants/constViews';
 import ProductTabs from '../components/ProductTabs';
+import Order from './customer/Order';
 
 const styles = (theme) => ({
   root: {
@@ -28,6 +35,7 @@ const { CARTE, MENUS, COMMANDE } = SUB_VIEWS;
 class Customer extends Component {
   state = {
     view: CARTE,
+    products: [],
   };
 
   changeView = (newView) => {
@@ -38,9 +46,25 @@ class Customer extends Component {
     fetchStarters.request();
   }
 
+  handleAddProduct = (product) => {
+    this.setState((prevState) => {
+      return { products: [...prevState.products, product] };
+    });
+  };
+
+  handleDeleteProduct = (product, positionToRemove) => {
+    this.setState((prevState) => {
+      return {
+        products: prevState.products.filter(
+          (element, index) => index !== positionToRemove,
+        ),
+      };
+    });
+  };
+
   render() {
     const { classes } = this.props;
-    const { view } = this.state;
+    const { view, products } = this.state;
 
     return (
       <div className={classes.root}>
@@ -48,14 +72,14 @@ class Customer extends Component {
           <List>
             {[
               { text: 'Carte', view: CARTE },
-              { text: 'Menus', view: MENUS },
+              // { text: 'Menus', view: MENUS },
               { text: 'Commande', view: COMMANDE },
-            ].map(({ text, view }, index) => (
+            ].map(({ text, view }) => (
               <ListItem button key={text} onClick={() => this.changeView(view)}>
                 <ListItemIcon>
-                  {index === 0 ? (
+                  {view === CARTE ? (
                     <Fastfood />
-                  ) : index === 1 ? (
+                  ) : view === MENUS ? (
                     <DeveloperBoard />
                   ) : (
                     <Assignment />
@@ -69,11 +93,17 @@ class Customer extends Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           {view === CARTE ? (
-            <ProductTabs caller={VIEWS.CUSTOMER} />
+            <ProductTabs
+              caller={VIEWS.CUSTOMER}
+              handleAddProduct={this.handleAddProduct}
+            />
           ) : view === MENUS ? (
             ''
           ) : (
-            ''
+            <Order
+              products={products}
+              handleDeleteProduct={this.handleDeleteProduct}
+            />
           )}
         </main>
       </div>
