@@ -34,6 +34,7 @@ class ProductTabs extends React.Component {
       desserts,
       drinks,
       caller,
+      handleAddProduct,
     } = this.props;
     const { value } = this.state;
 
@@ -53,10 +54,34 @@ class ProductTabs extends React.Component {
             <Tab label="Boissons" />
           </Tabs>
         </Paper>
-        {value === 0 && <ProductsList products={starters} caller={caller} />}
-        {value === 1 && <ProductsList products={mainCourses} caller={caller} />}
-        {value === 2 && <ProductsList products={desserts} caller={caller} />}
-        {value === 3 && <ProductsList products={drinks} caller={caller} />}
+        {value === 0 && (
+          <ProductsList
+            products={starters}
+            caller={caller}
+            handleAddProduct={handleAddProduct}
+          />
+        )}
+        {value === 1 && (
+          <ProductsList
+            products={mainCourses}
+            caller={caller}
+            handleAddProduct={handleAddProduct}
+          />
+        )}
+        {value === 2 && (
+          <ProductsList
+            products={desserts}
+            caller={caller}
+            handleAddProduct={handleAddProduct}
+          />
+        )}
+        {value === 3 && (
+          <ProductsList
+            products={drinks}
+            caller={caller}
+            handleAddProduct={handleAddProduct}
+          />
+        )}
       </>
     );
   }
@@ -74,6 +99,7 @@ const mapStateToProps = (state) => {
 ProductTabs.propTypes = {
   classes: PropTypes.object.isRequired,
   caller: PropTypes.string.isRequired,
+  handleAddProduct: PropTypes.func,
 };
 
 export default connect(mapStateToProps)(withStyles(styles)(ProductTabs));

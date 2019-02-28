@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import ROUTES from '../constants/constRoutes';
+import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
 
 const drawerWidth = 240;
 
@@ -25,6 +26,12 @@ const styles = (theme) => ({
   },
   grow: {
     flexGrow: 1,
+  },
+  icon: {
+    margin: theme.spacing.unit,
+    color: '#FFF',
+    fontSize: 32,
+    textDecoration: 'none',
   },
   toolbar: theme.mixins.toolbar,
 });
@@ -46,7 +53,9 @@ const Header = (props) => {
             {title}
           </Typography>
           <Button color="inherit">
-            <Link to={ROUTES.LOGIN}>Quitter</Link>
+            <Link to={ROUTES.BOARD}>
+              <PowerSettingsNew className={classes.icon} />
+            </Link>
           </Button>
         </Toolbar>
       </AppBar>

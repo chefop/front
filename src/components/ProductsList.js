@@ -12,14 +12,23 @@ const styles = () => ({
 
 class ProductsList extends Component {
   render() {
-    const { products, classes, caller } = this.props;
+    const { products, classes, caller, handleAddProduct } = this.props;
 
     return (
       <div style={{ marginTop: 24 }}>
         <Grid container spacing={24} className={classes.root} direction="row">
           {products.map(
             (
-              { photo, name, description, df_price, vat, quantity, allergen },
+              {
+                photo,
+                name,
+                description,
+                df_price,
+                vat,
+                quantity,
+                allergen,
+                _id,
+              },
               index,
             ) => {
               return (
@@ -32,7 +41,9 @@ class ProductsList extends Component {
                     vat={vat}
                     quantity={quantity}
                     allergen={allergen}
+                    _id={_id}
                     caller={caller}
+                    handleAddProduct={handleAddProduct}
                   />
                 </Grid>
               );
@@ -48,6 +59,7 @@ ProductsList.propTypes = {
   classes: PropTypes.object.isRequired,
   expanded: PropTypes.oneOf([PropTypes.string, false, null]),
   caller: PropTypes.string.isRequired,
+  handleAddProduct: PropTypes.func,
 };
 
 export default withStyles(styles)(ProductsList);
