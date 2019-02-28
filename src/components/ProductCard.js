@@ -33,14 +33,14 @@ class ProductCard extends Component {
       photo,
       name,
       description,
-      dfPrice,
+      df_price,
       vat,
       quantity,
       allergen,
       caller,
     } = this.props;
 
-    const price = (dfPrice * (1 + vat)).toFixed(2);
+    const price = (df_price * (1 + vat / 100)).toFixed(2);
 
     const { dense } = this.state;
     return (
@@ -116,7 +116,7 @@ ProductCard.propTypes = {
   name: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  dfPrice: PropTypes.number.isRequired,
+  df_price: PropTypes.number.isRequired,
   vat: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
   allergen: PropTypes.arrayOf(PropTypes.object),

@@ -21,7 +21,7 @@ const initialState = {
     {
       name: 'Salade niçoise 🥗',
       description: 'Une salade faite à Nice',
-      dfPrice: 7.4,
+      df_price: 7.4,
       vat: 0.2,
       quantity: 1000,
       allergen: [{ _id: '312223', name: 'noix de pécan' }],
@@ -33,7 +33,7 @@ const initialState = {
       name: 'Foie gras 🦆',
       description:
         'Il était une fois un foie se prêtant ma foi à une degustation foireuse.',
-      dfPrice: 10.3,
+      df_price: 10.3,
       vat: 0.2,
       quantity: 78,
       allergen: [],
@@ -45,7 +45,7 @@ const initialState = {
       name: 'On a tenté un truc 🐐',
       description:
         "C'est la surprise (C'est un millefeuille… Avec de la betterave… et du fromage de chèvre…)",
-      dfPrice: 10.3,
+      df_price: 10.3,
       vat: 0.2,
       quantity: 2,
       allergen: [
@@ -63,7 +63,7 @@ const initialState = {
     {
       name: 'Salade niçoise 🥗',
       description: 'Une salade faite à Nice',
-      dfPrice: 7.4,
+      df_price: 7.4,
       vat: 0.2,
       quantity: 1000,
       allergen: [{ _id: '312223', name: 'noix de pécan' }],
@@ -75,7 +75,7 @@ const initialState = {
       name: 'Foie gras 🦆',
       description:
         'Il était une fois un foie se prêtant ma foi à une degustation foireuse.',
-      dfPrice: 10.3,
+      df_price: 10.3,
       vat: 0.2,
       quantity: 78,
       allergen: [],
@@ -87,7 +87,7 @@ const initialState = {
       name: 'On a tenté un truc 🐐',
       description:
         "C'est la surprise (C'est un millefeuille… Avec de la betterave… et du fromage de chèvre…)",
-      dfPrice: 10.3,
+      df_price: 10.3,
       vat: 0.2,
       quantity: 2,
       allergen: [
@@ -105,7 +105,7 @@ const initialState = {
     {
       name: 'Salade niçoise 🥗',
       description: 'Une salade faite à Nice',
-      dfPrice: 7.4,
+      df_price: 7.4,
       vat: 0.2,
       quantity: 1000,
       allergen: [{ _id: '312223', name: 'noix de pécan' }],
@@ -117,7 +117,7 @@ const initialState = {
       name: 'Foie gras 🦆',
       description:
         'Il était une fois un foie se prêtant ma foi à une degustation foireuse.',
-      dfPrice: 10.3,
+      df_price: 10.3,
       vat: 0.2,
       quantity: 78,
       allergen: [],
@@ -129,7 +129,7 @@ const initialState = {
       name: 'On a tenté un truc 🐐',
       description:
         "C'est la surprise (C'est un millefeuille… Avec de la betterave… et du fromage de chèvre…)",
-      dfPrice: 10.3,
+      df_price: 10.3,
       vat: 0.2,
       quantity: 2,
       allergen: [
@@ -147,7 +147,7 @@ const initialState = {
     {
       name: 'Salade niçoise 🥗',
       description: 'Une salade faite à Nice',
-      dfPrice: 7.4,
+      df_price: 7.4,
       vat: 0.2,
       quantity: 1000,
       allergen: [{ _id: '312223', name: 'noix de pécan' }],
@@ -159,7 +159,7 @@ const initialState = {
       name: 'Foie gras 🦆',
       description:
         'Il était une fois un foie se prêtant ma foi à une degustation foireuse.',
-      dfPrice: 10.3,
+      df_price: 10.3,
       vat: 0.2,
       quantity: 78,
       allergen: [],
@@ -171,7 +171,7 @@ const initialState = {
       name: 'On a tenté un truc 🐐',
       description:
         "C'est la surprise (C'est un millefeuille… Avec de la betterave… et du fromage de chèvre…)",
-      dfPrice: 10.3,
+      df_price: 10.3,
       vat: 0.2,
       quantity: 2,
       allergen: [

@@ -27,7 +27,6 @@ import { addDrink } from '../../store/ducks/drinks';
 import {
   isNotEmpty,
   isSuperiorOrEqualToZero,
-  isSuperiorToZero,
 } from '../../utils/validationsHelper';
 import { red } from '@material-ui/core/colors';
 import Typography from '@material-ui/core/Typography';
@@ -185,8 +184,7 @@ class DialogForm extends Component {
 
     if (
       isNotEmpty([name, description, photo]) &&
-      isSuperiorToZero([quantity]) &&
-      isSuperiorOrEqualToZero([vat, df_price])
+      isSuperiorOrEqualToZero([quantity, vat, df_price])
     ) {
       ({
         [PRODUCTS.STARTER]: () => {

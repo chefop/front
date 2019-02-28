@@ -22,7 +22,7 @@ const initialState = {
       name: 'Crêpe au sucre',
       description:
         'Tu as de la pate ? Tu as du sucre ? Beh tu met la pate avec du suc dessus',
-      dfPrice: 2.8,
+      df_price: 2.8,
       vat: 0.2,
       quantity: 46,
       allergen: [
@@ -36,7 +36,7 @@ const initialState = {
       name: 'Browkies',
       description:
         'Un genre de Brownie au Cookies. En vrai, de toi à moi, une tuerie !!',
-      dfPrice: 2.5,
+      df_price: 2.5,
       vat: 0.2,
       quantity: 24,
       allergen: [

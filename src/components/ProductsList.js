@@ -19,7 +19,7 @@ class ProductsList extends Component {
         <Grid container spacing={24} className={classes.root} direction="row">
           {products.map(
             (
-              { photo, name, description, dfPrice, vat, quantity, allergen },
+              { photo, name, description, df_price, vat, quantity, allergen },
               index,
             ) => {
               return (
@@ -28,7 +28,7 @@ class ProductsList extends Component {
                     photo={photo}
                     name={name}
                     description={description}
-                    dfPrice={dfPrice}
+                    df_price={df_price}
                     vat={vat}
                     quantity={quantity}
                     allergen={allergen}
