@@ -23,6 +23,7 @@ export function* addStarterWorker(action) {
 }
 
 export function* fetchStartersWorker() {
+  console.log('azeaz');
   try {
     const res = yield call(starterAPI.fetchStarters);
     if (res.status === 200) {

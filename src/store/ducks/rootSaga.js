@@ -9,12 +9,12 @@ import volumeSaga from './volumes/operations';
 import drinkSaga from './drinks/operations';
 
 export default function* rootSaga() {
-  yield all(
-    [fork(mainCourseSaga)],
-    [fork(allergenSaga)],
-    [fork(starterSaga)],
-    [fork(dessertSaga)],
-    [fork(volumeSaga)],
-    [fork(drinkSaga)],
-  );
+  yield all([
+    fork(mainCourseSaga),
+    fork(allergenSaga),
+    fork(starterSaga),
+    fork(dessertSaga),
+    fork(volumeSaga),
+    fork(drinkSaga),
+  ]);
 }

@@ -33,6 +33,7 @@ export function* addMainCourseWorker(action) {
 }
 
 export function* fetchMainCoursesWorker() {
+  console.log('get ça');
   try {
     const res = yield call(mainCourseAPI.fetchMainCourses);
     if (res.status === 200) {

@@ -5,7 +5,7 @@ import {
 
 // Action types
 export const ADD_DESSERT = phasedActionTypes('dessert/ADD_DESSERT');
-export const FETCH_DESSERTS = phasedActionTypes('dessert/FETCH_DESSERT');
+export const FETCH_DESSERTS = phasedActionTypes('dessert/FETCH_DESSERTS');
 export const UPDATE_DESSERT = phasedActionTypes('dessert/UPDATE_DESSERT');
 export const DELETE_DESSERT = phasedActionTypes('dessert/DELETE_DESSERT');
 
