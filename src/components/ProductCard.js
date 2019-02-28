@@ -43,7 +43,6 @@ class ProductCard extends Component {
     const price = (dfPrice * (1 + vat)).toFixed(2);
 
     const { dense } = this.state;
-
     return (
       <Card className={classes.card}>
         <CardMedia className={classes.media} image={photo} title={name} />
@@ -120,7 +119,7 @@ ProductCard.propTypes = {
   dfPrice: PropTypes.number.isRequired,
   vat: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
-  allergen: PropTypes.arrayOf(PropTypes.string),
+  allergen: PropTypes.arrayOf(PropTypes.object),
   caller: PropTypes.string.isRequired,
 };
 
