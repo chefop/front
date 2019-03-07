@@ -46,7 +46,7 @@ class Customer extends Component {
     fetchStarters.request();
   }
 
-  handleAddProduct = (product) => {
+  handleAddProductToCommand = (product) => {
     this.setState((prevState) => {
       return { products: [...prevState.products, product] };
     });
@@ -95,7 +95,7 @@ class Customer extends Component {
           {view === CARTE ? (
             <ProductTabs
               caller={VIEWS.CUSTOMER}
-              handleAddProduct={this.handleAddProduct}
+              handleAddProductToCommand={this.handleAddProductToCommand}
             />
           ) : view === MENUS ? (
             ''

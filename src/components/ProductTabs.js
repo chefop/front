@@ -10,6 +10,7 @@ import { getStarters } from '../store/ducks/starters/selectors';
 import { getMainCourses } from '../store/ducks/mainCourses/selectors';
 import { getDesserts } from '../store/ducks/desserts/selectors';
 import { getDrinks } from '../store/ducks/drinks/selectors';
+import PRODUCTS from '../constants/constProducts';
 
 const styles = {
   root: {
@@ -34,7 +35,7 @@ class ProductTabs extends React.Component {
       desserts,
       drinks,
       caller,
-      handleAddProduct,
+      handleAddProductToCommand,
     } = this.props;
     const { value } = this.state;
 
@@ -56,30 +57,34 @@ class ProductTabs extends React.Component {
         </Paper>
         {value === 0 && (
           <ProductsList
+            type={PRODUCTS.STARTER}
             products={starters}
             caller={caller}
-            handleAddProduct={handleAddProduct}
+            handleAddProductToCommand={handleAddProductToCommand}
           />
         )}
         {value === 1 && (
           <ProductsList
+            type={PRODUCTS.MAIN_COURSE}
             products={mainCourses}
             caller={caller}
-            handleAddProduct={handleAddProduct}
+            handleAddProductToCommand={handleAddProductToCommand}
           />
         )}
         {value === 2 && (
           <ProductsList
+            type={PRODUCTS.DESSERT}
             products={desserts}
             caller={caller}
-            handleAddProduct={handleAddProduct}
+            handleAddProductToCommand={handleAddProductToCommand}
           />
         )}
         {value === 3 && (
           <ProductsList
+            type={PRODUCTS.DRINK}
             products={drinks}
             caller={caller}
-            handleAddProduct={handleAddProduct}
+            handleAddProductToCommand={handleAddProductToCommand}
           />
         )}
       </>
@@ -99,7 +104,7 @@ const mapStateToProps = (state) => {
 ProductTabs.propTypes = {
   classes: PropTypes.object.isRequired,
   caller: PropTypes.string.isRequired,
-  handleAddProduct: PropTypes.func,
+  handleAddProductToCommand: PropTypes.func,
 };
 
 export default connect(mapStateToProps)(withStyles(styles)(ProductTabs));
