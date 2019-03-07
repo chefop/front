@@ -17,36 +17,7 @@ export const deleteDessert = phasedActionCreators(DELETE_DESSERT);
 
 // Initial State
 const initialState = {
-  desserts: [
-    {
-      name: 'Crêpe au sucre',
-      description:
-        'Tu as de la pate ? Tu as du sucre ? Beh tu met la pate avec du suc dessus',
-      df_price: 2.8,
-      vat: 0.2,
-      quantity: 46,
-      allergen: [
-        { _id: '123123', name: 'Soja' },
-        { _id: '1233232123', name: 'Lait' },
-      ],
-      photo:
-        'https://www.recettes.net/documents/upload/original/c/r/crepe-au-sucre.jpg',
-    },
-    {
-      name: 'Browkies',
-      description:
-        'Un genre de Brownie au Cookies. En vrai, de toi à moi, une tuerie !!',
-      df_price: 2.5,
-      vat: 0.2,
-      quantity: 24,
-      allergen: [
-        { _id: '12312223', name: 'gluten' },
-        { _id: '122323', name: 'Lait' },
-      ],
-      photo:
-        'https://static.cuisineaz.com/400x320/i140676-brownie-cookie-chocolat-noix-de-pecan.jpeg',
-    },
-  ],
+  desserts: [],
   error: {},
 };
 
