@@ -13,6 +13,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ModalCustom from './ModalCustom';
 import VIEWS from '../constants/constViews';
 import { priceEuros, priceWithVat } from '../utils/priceHelper';
+import PRODUCTS from '../constants/constProducts';
+import { bindActionCreators } from 'redux';
+import { connect, mapStateToProps } from 'react-redux';
+import { deleteStarter } from '../store/ducks/starters';
+import { deleteMainCourse } from '../store/ducks/mainCourses';
+import { deleteDessert } from '../store/ducks/desserts';
+import { deleteDrink } from '../store/ducks/drinks';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = () => ({
   card: {
@@ -24,6 +33,25 @@ const styles = () => ({
 });
 
 class ProductCard extends Component {
+  handleDeleteProductFromMenu = (id) => {
+    const { type } = this.props;
+
+    switch (type) {
+      case PRODUCTS.STARTER:
+        this.props.deleteStarter(id);
+        break;
+      case PRODUCTS.MAIN_COURSE:
+        this.props.deleteMainCourse(id);
+        break;
+      case PRODUCTS.DESSERT:
+        this.props.deleteDessert(id);
+        break;
+      default:
+        this.props.deleteDrink(id);
+        break;
+    }
+  };
+
   render() {
     const {
       classes,
@@ -36,7 +64,7 @@ class ProductCard extends Component {
       allergen,
       caller,
       _id,
-      handleAddProduct,
+      handleAddProductToCommand,
     } = this.props;
 
     const price = priceWithVat(df_price, vat);
@@ -86,30 +114,45 @@ class ProductCard extends Component {
           <Typography variant="h5" gutterBottom style={{ padding: '8px' }}>
             {priceEuros(price)}
           </Typography>
-          {caller === VIEWS.CUSTOMER && (
+          {caller === VIEWS.CUSTOMER ? (
             <Button
               size="small"
               color="primary"
               style={{ marginLeft: 'auto' }}
               {...quantity === 0 && { disabled: true }}
-              onClick={() => handleAddProduct({ name, _id, price })}
+              onClick={() => handleAddProductToCommand({ name, _id, price })}
             >
               Ajouter
             </Button>
-          )
-          //   : (
-          //   <Button size="small" color="primary" style={{ marginLeft: 'auto' }}>
-          //     Modifier
-          //   </Button>
-          // )
-          }
+          ) : (
+            <IconButton
+              aria-label="Delete"
+              style={{ marginLeft: 'auto' }}
+              onClick={() => this.handleDeleteProductFromMenu(_id)}
+            >
+              <DeleteIcon />
+            </IconButton>
+          )}
         </CardActions>
       </Card>
     );
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      deleteStarter: deleteStarter.request,
+      deleteMainCourse: deleteMainCourse.request,
+      deleteDessert: deleteDessert.request,
+      deleteDrink: deleteDrink.request,
+    },
+    dispatch,
+  );
+};
+
 ProductCard.propTypes = {
+  type: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
@@ -120,7 +163,10 @@ ProductCard.propTypes = {
   allergen: PropTypes.arrayOf(PropTypes.object),
   caller: PropTypes.string.isRequired,
   _id: PropTypes.string.isRequired,
-  handleAddProduct: PropTypes.func,
+  handleAddProductToCommand: PropTypes.func,
 };
 
-export default withStyles(styles)(ProductCard);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(withStyles(styles)(ProductCard));

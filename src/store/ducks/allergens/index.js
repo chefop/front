@@ -17,11 +17,7 @@ export const deleteAllergen = phasedActionCreators(DELETE_ALLERGEN);
 
 // Initial State
 const initialState = {
-  allergens: [
-    { _id: 'allergen1', name: 'lactose' },
-    { _id: 'allergen2', name: 'soy' },
-    { _id: 'allergen3', name: 'gluten' },
-  ],
+  allergens: [],
   error: {},
 };
 
