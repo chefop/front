@@ -48,7 +48,17 @@ class Customer extends Component {
   };
 
   componentDidMount() {
-    fetchStarters.request();
+    const {
+      fetchStarters,
+      fetchMainCourses,
+      fetchDesserts,
+      fetchDrinks,
+    } = this.props;
+
+    fetchStarters();
+    fetchMainCourses();
+    fetchDesserts();
+    fetchDrinks();
   }
 
   handleAddProductToCommand = (product) => {
