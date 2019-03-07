@@ -13,11 +13,16 @@ import {
   AirlineSeatReclineNormal,
 } from '@material-ui/icons';
 import Header from '../components/Header';
-import { fetchStarters } from '../store/ducks/starters';
 import SUB_VIEWS from '../constants/constSubViews';
 import VIEWS from '../constants/constViews';
 import ProductTabs from '../components/ProductTabs';
 import Order from './customer/Order';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchDesserts } from '../store/ducks/desserts';
+import { fetchDrinks } from '../store/ducks/drinks';
+import { fetchMainCourses } from '../store/ducks/mainCourses';
+import { fetchStarters } from '../store/ducks/starters';
 
 const styles = (theme) => ({
   root: {
@@ -111,8 +116,23 @@ class Customer extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchStarters: fetchStarters.request,
+      fetchMainCourses: fetchMainCourses.request,
+      fetchDesserts: fetchDesserts.request,
+      fetchDrinks: fetchDrinks.request,
+    },
+    dispatch,
+  );
+};
+
 Customer.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Customer);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(withStyles(styles)(Customer));
